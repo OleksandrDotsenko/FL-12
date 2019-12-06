@@ -1,0 +1,80 @@
+@media print {
+  body {
+    background-color: white;
+    padding-top: 0;
+    text-align: center;
+  }
+  .tm-sidebar,
+  #about,
+  .carousel-indicators,
+  section.blocks > div.tm-content-box,
+  section:nth-last-child(2),
+  section img,
+  img.img-fluid {
+    display: none;
+  }
+
+  .tm-main-content {
+    padding-top: 0;
+  }
+
+  .tm-banner {
+    padding-top: 20px;
+  }
+
+  .tm-team-description-container {
+    max-width: 100%;
+  }
+
+  .tm-section-title {
+    text-transform: uppercase;
+  }
+
+  section .padding-medium,
+  #tmCarousel {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  #home {
+    margin-bottom: 0;
+  }
+
+  section > div.tm-content-box,
+  .tm-main-content > section.tm-content-box {
+    margin-bottom: 0;
+  }
+
+  section.heading h2 {
+    color: lightskyblue;
+    font-weight: 300;
+    margin: 0;
+    margin-bottom: 20px;
+  }
+  section.heading .padding-medium {
+    width: 380px;
+    margin: 0 auto;
+  }
+  section.heading ol {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  section.heading ol li:nth-child(even) {
+    text-align: left;
+  }
+  section.heading ol li:nth-child(odd) {
+    text-align: right;
+  }
+
+  section.blocks .tm-section-description:last-child {
+    font-style: italic;
+    word-spacing: 2em;
+  }
+
+  section {
+    margin-bottom: 18px;
+  }
+  section.blocks {
+    margin-bottom: 35px;
+  }
+}
