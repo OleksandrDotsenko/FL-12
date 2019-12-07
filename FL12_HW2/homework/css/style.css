@@ -120,3 +120,59 @@ nav.tm-main-nav a:hover {
   animation-name: banner-animation;
   animation-iteration-count: infinite;
 }
+
+.flex-2-col {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.flex-2-col .flex-item img {
+  width: 100%;
+}
+.flex-2-col .tm-team-description-container {
+  max-width: 350px;
+  min-width: 350px;
+  text-indent: 1em;
+}
+.flex-2-col .tm-team-description-container h2 {
+  text-align: center;
+}
+
+.tm-box-bg-title:hover {
+  background-color: lightgrey;
+  color: lightskyblue;
+  font-style: italic;
+}
+
+section.heading h2 {
+  color: lightskyblue;
+  font-weight: 300;
+  margin-bottom: 20px;
+  text-align: center;
+}
+section.heading ol {
+  list-style: lower-alpha;
+}
+section.heading ol li:hover:before {
+  content: '>';
+  font-weight: bold;
+}
+section.heading ol li:nth-child(1):after,
+section.heading ol li:nth-child(3):after {
+  content: 'New';
+  position: relative;
+  font-size: x-small;
+  color: red;
+  top: -0.5em;
+  font-variant: small-caps;
+  font-weight: bold;
+}
+
+section.blocks .tm-section-description {
+  text-indent: 1em;
+}
+section.blocks .tm-section-description:last-child {
+  font-style: italic;
+  letter-spacing: 5px;
+  word-spacing: 10px;
+}
