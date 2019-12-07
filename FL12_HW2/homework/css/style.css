@@ -78,3 +78,45 @@
     margin-bottom: 35px;
   }
 }
+
+@keyframes banner-animation {
+  from {
+    margin-left: 40%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    margin-left: 0%;
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+#home {
+  box-shadow: 0px 0px 10px -1px rgba(0, 0, 0, 0.75);
+}
+
+nav.tm-main-nav a:hover {
+  background-color: lightskyblue;
+  color: #fff;
+}
+
+.tm-banner {
+  background: lightskyblue;
+  background: linear-gradient(to right, lightskyblue, burlywood);
+}
+.tm-banner-inner {
+  background-color: white;
+  overflow: hidden;
+}
+.tm-banner-text {
+  text-shadow: 5px 5px 3px #333;
+  white-space: nowrap;
+  animation-duration: 5s;
+  animation-name: banner-animation;
+  animation-iteration-count: infinite;
+}
