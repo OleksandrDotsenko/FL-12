@@ -165,6 +165,7 @@ textarea.form-control {
 .contact-form .submit-btn:hover {
   background-color: #0275d8;
   color: white;
+  border-color: #0275d9;
 }
 
 @media print {
@@ -186,7 +187,6 @@ textarea.form-control {
     box-shadow: none;
   }
   .tm-banner-text {
-    animation: none;
     text-shadow: none;
   }
   .tm-section-title {
