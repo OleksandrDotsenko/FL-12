@@ -1,17 +1,13 @@
 @keyframes banner-animation {
   from {
-    margin-left: 40%;
+    left: 200px;
     opacity: 0;
   }
   10% {
     opacity: 1;
   }
-  90% {
-    margin-left: 0%;
-    opacity: 1;
-  }
   to {
-    opacity: 0;
+    left: 0;
   }
 }
 
@@ -50,10 +46,10 @@ nav.tm-main-nav a:hover {
 }
 .tm-banner-text {
   text-shadow: 5px 5px 3px #333;
+  position: relative;
   white-space: nowrap;
-  animation-duration: 5s;
+  animation-duration: 4s;
   animation-name: banner-animation;
-  animation-iteration-count: infinite;
 }
 
 .flex-2-col {
