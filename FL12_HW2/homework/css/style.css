@@ -74,6 +74,7 @@ nav.tm-main-nav a:hover {
   background-color: lightgrey;
   color: lightskyblue;
   font-style: italic;
+  font-weight: bolder;
 }
 
 section.heading h2 {
@@ -134,7 +135,11 @@ input.form-control {
 input:focus {
   background-color: lightskyblue;
 }
-textarea.form-control,
+textarea.form-control {
+  border: 1px solid lightskyblue;
+  box-shadow: none;
+  height: 230px;
+}
 textarea.form-control:focus {
   border: 1px solid lightskyblue;
   box-shadow: none;
@@ -170,50 +175,39 @@ textarea.form-control {
   }
   .tm-sidebar,
   #about,
+  img.img-fluid,
   .carousel-indicators,
-  section.blocks > div.tm-content-box,
   section:nth-last-child(2),
-  section img,
-  img.img-fluid {
+  .tm-main-content > section:before {
     display: none;
   }
-
-  .tm-main-content {
-    padding-top: 0;
+  #home,
+  .tm-main-content > section {
+    box-shadow: none;
   }
-
-  .tm-banner {
-    padding-top: 20px;
+  .tm-banner-text {
+    animation: none;
+    text-shadow: none;
   }
-
-  .tm-team-description-container {
-    max-width: 100%;
-  }
-
   .tm-section-title {
     text-transform: uppercase;
+    margin-bottom: 18px;
   }
-
-  section .padding-medium,
-  #tmCarousel {
+  .flex-2-col {
+    display: block;
+  }
+  .flex-2-col .flex-item img {
+    display: none;
+  }
+  .flex-2-col .tm-team-description-container {
+    max-width: 100%;
     padding-top: 0;
-    padding-bottom: 0;
+    padding-bottom: 25px;
   }
-
-  #home {
-    margin-bottom: 0;
-  }
-
-  section > div.tm-content-box,
-  .tm-main-content > section.tm-content-box {
-    margin-bottom: 0;
-  }
-
   section.heading h2 {
-    color: lightskyblue;
     font-weight: 300;
     margin: 0;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
   }
   section.heading .padding-medium {
     width: 380px;
@@ -229,16 +223,39 @@ textarea.form-control {
   section.heading ol li:nth-child(odd) {
     text-align: right;
   }
-
-  section.blocks .tm-section-description:last-child {
-    font-style: italic;
-    word-spacing: 2em;
+  section.heading ol li:after {
+    display: none;
   }
-
-  section {
-    margin-bottom: 18px;
+  section.blocks > div.tm-content-box {
+    display: none;
   }
-  section.blocks {
+  section.blocks > div.tm-team-description-container {
+    max-width: 100%;
+    text-align: center;
     margin-bottom: 35px;
+  }
+  p.tm-section-description {
+    text-indent: 0px;
+    line-height: 26px;
+  }
+
+  .tm-banner {
+    padding-top: 20px;
+    padding-bottom: 50px;
+    background: none;
+  }
+  .tm-main-content {
+    padding-top: 14px;
+  }
+  .tm-content-box {
+    margin-bottom: 0px;
+  }
+  .padding-medium {
+    padding-top: 0;
+    padding-bottom: 0px;
+  }
+  #tmCarousel {
+    padding-top: 5px;
+    padding-bottom: 0;
   }
 }
