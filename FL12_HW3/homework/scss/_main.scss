@@ -1,8 +1,102 @@
-// Example
-body {
-  background: $contentBackground;
+html {
+  line-height: 1.15;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  background-color: #21232e;
 }
+body {
+  margin: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 14px;
+  color: black;
+  background-color: white;
+}
+
+header {
+  max-width: 1600px;
+  height: 583px;
+  padding-top: 17px;
+  background: url('../img/m-h-day.jpg');
+  background-position: center;
+  border-bottom-right-radius: 650px 250px;
+}
+header .header-wrap {
+  margin-left: 10%;
+}
+header .header-wrap .landing-logo img {
+  width: 39px;
+  float: left;
+}
+header .header-wrap .landing-logo p {
+  margin-top: 0;
+  padding-left: 49px;
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+  margin-bottom: 4.3%;
+}
+header .header-wrap .landing-logo p span {
+  display: block;
+  font-size: 0.4em;
+  padding-top: 0.5em;
+  padding-left: 1em;
+  letter-spacing: 0.1em;
+}
+header .header-wrap .header_heading {
+  margin: 0;
+  font-size: 3.7rem;
+  font-weight: bold;
+  line-height: 3.8rem;
+  position: relative;
+  width: 400px;
+  margin-bottom: 3.6%;
+  color: #2c2f3c;
+}
+header .header-wrap .header_heading:after {
+  content: 'awesome';
+  position: absolute;
+  top: 78px;
+  left: 0px;
+  background-color: #13a0c7;
+  height: 43px;
+  line-height: 25px;
+}
+header .header-wrap .header_text {
+  margin: 0;
+  width: 37%;
+  line-height: 1.3rem;
+  color: lighten(#2c2f3c, 2%);
+  margin-bottom: 3.5%;
+}
+.header_button {
+  background-color: #699900;
+  border: none;
+  margin: 0;
+  padding: 12px 37px;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.header_button:hover {
+  background-color: lighten(#699900, 5%);
+}
+a.login {
+  color: white;
+  font-size: 1rem;
+}
+a.login:hover {
+  text-decoration: none;
+  color: lighten(#699900, 5%);
+}
+header .header-wrap .header_button {
+  margin-right: 8.7%;
+}
+
 main {
-  margin: 0 auto;
-  width: 960px;
+  max-width: 1600px;
+}
+
+footer {
+  background-color: #21232e;
 }
