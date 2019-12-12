@@ -66,18 +66,19 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   @include font($s: 14px);
   color: black;
-  background-color: white;
+  background-color: $colorBackground;
 }
 
 header {
   max-width: 1600px;
   height: 583px;
   @include padding($t: 17px);
-  background: url('../img/m-h-day.jpg') center;
+  background: $imageBackgroundHeader center;
   border-bottom-right-radius: 650px 250px;
 
   .header-wrap {
     @include margin($l: 10%);
+    color: $colorHeader;
 
     .landing-logo img {
       width: 39px;
@@ -102,14 +103,13 @@ header {
       width: 400px;
       position: relative;
       @include font($s: 3.7rem, $w: bold, $h: 3.8rem);
-      color: #2c2f3c;
 
       &:after {
         content: 'awesome';
         height: 43px;
         @include absolute(78px, 0px);
         @include font($h: 25px);
-        background-color: #13a0c7;
+        background-color: $colorBackgroundSticker;
       }
     }
 
@@ -117,7 +117,7 @@ header {
       @include margin($reset: true, $b: 3.5%);
       width: 37%;
       @include font($h: 1.3rem);
-      color: lighten(#2c2f3c, 2%);
+      color: lighten($colorHeader, 2%);
     }
 
     .header_button {
@@ -152,5 +152,5 @@ main {
 }
 
 footer {
-  background-color: #21232e;
+  background-color: $colorBackgroundFooter;
 }
