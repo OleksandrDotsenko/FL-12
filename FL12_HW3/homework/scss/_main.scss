@@ -12,6 +12,30 @@ body {
   background-color: $colorBG;
 }
 
+.landing-logo {
+  width: 110px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  img {
+    width: 38px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1.2rem;
+    letter-spacing: 0.1rem;
+
+    span {
+      display: block;
+      padding: 0.5em 0 0 1em;
+      font-size: 0.4em;
+      letter-spacing: 0.1em;
+    }
+  }
+}
+
 header {
   max-width: 1600px;
   height: 583px;
@@ -24,27 +48,12 @@ header {
     margin-left: 10%;
     color: $colorHeader;
 
-    .landing-logo img {
-      width: 39px;
-      float: left;
-    }
-
-    .landing-logo p {
-      margin: 0 0 4.3% 0;
-      padding-left: 49px;
-      font-size: 1.2rem;
-      letter-spacing: 0.1rem;
-
-      span {
-        display: block;
-        padding: 0.5em 0 0 1em;
-        font-size: 0.4em;
-        letter-spacing: 0.1em;
-      }
+    .landing-logo {
+      margin-bottom: 59px;
     }
 
     .header_heading {
-      margin: 0 0 3.6% 0;
+      margin: 0 0 48px 0;
       width: 400px;
       position: relative;
       font-weight: bold;
@@ -63,8 +72,9 @@ header {
     }
 
     .header_text {
-      margin: 0 0 3.5% 0;
-      width: 37%;
+      margin: 0 0 52px 0;
+      max-width: 530px;
+      padding-right: 20px;
       line-height: 1.3rem;
       color: lighten($colorHeader, 2%);
     }
@@ -264,30 +274,8 @@ footer {
     flex-wrap: wrap;
 
     .footer_logo {
-      overflow: hidden;
-      width: 110px;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
       padding-top: 5px;
       margin-right: 25px;
-
-      img {
-        width: 39px;
-      }
-
-      p {
-        margin: 0;
-        font-size: 1.2rem;
-        letter-spacing: 0.1rem;
-
-        span {
-          display: block;
-          padding: 0.5em 0 0 1em;
-          font-size: 0.4em;
-          letter-spacing: 0.1em;
-        }
-      }
     }
 
     .footer_text {
