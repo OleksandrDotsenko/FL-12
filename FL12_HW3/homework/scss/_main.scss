@@ -252,4 +252,51 @@ main {
 
 footer {
   background-color: $colorBGFooter;
+  padding: 91px 0 34px 0;
+  color: #b8babe;
+
+  .footer-wrap {
+    margin: 0 auto;
+    width: 81%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .footer_logo {
+      overflow: hidden;
+      width: 110px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding-top: 5px;
+      margin-right: 25px;
+
+      img {
+        width: 39px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 1.2rem;
+        letter-spacing: 0.1rem;
+
+        span {
+          display: block;
+          padding: 0.5em 0 0 1em;
+          font-size: 0.4em;
+          letter-spacing: 0.1em;
+        }
+      }
+    }
+
+    .footer_text {
+      width: 260px;
+      margin-right: 25px;
+    }
+
+    .footer-cr {
+      padding-right: 63px;
+    }
+  }
 }
