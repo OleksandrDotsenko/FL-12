@@ -1,54 +1,3 @@
-@mixin margin($reset: false, $t: null, $r: null, $b: null, $l: null) {
-  @if $reset {
-    margin: 0;
-  }
-  @if $t {
-    margin-top: $t;
-  }
-  @if $r {
-    margin-right: $r;
-  }
-  @if $b {
-    margin-bottom: $b;
-  }
-  @if $l {
-    margin-left: $l;
-  }
-}
-
-@mixin padding($reset: false, $t: null, $r: null, $b: null, $l: null) {
-  @if $reset {
-    padding: 0;
-  }
-  @if $t {
-    padding-top: $t;
-  }
-  @if $r {
-    padding-right: $r;
-  }
-  @if $b {
-    padding-bottom: $b;
-  }
-  @if $l {
-    padding-left: $l;
-  }
-}
-
-@mixin font($s: null, $w: null, $h: null, $p: null) {
-  @if $s {
-    font-size: $s;
-  }
-  @if $w {
-    font-weight: $w;
-  }
-  @if $h {
-    line-height: $h;
-  }
-  @if $p {
-    letter-spacing: $p;
-  }
-}
-
 @mixin absolute($t, $l) {
   position: absolute;
   top: $t;
@@ -56,15 +5,15 @@
 }
 
 html {
-  @include font($h: 1.15);
+  line-height: 1.15;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   background-color: #21232e;
 }
 body {
-  @include margin($reset: true);
+  margin: 0;
   font-family: 'Source Sans Pro', sans-serif;
-  @include font($s: 14px);
+  font-size: 14px;
   color: black;
   background-color: $colorBackground;
 }
@@ -72,12 +21,12 @@ body {
 header {
   max-width: 1600px;
   height: 583px;
-  @include padding($t: 17px);
+  padding-top: 17px;
   background: $imageBackgroundHeader center;
   border-bottom-right-radius: 650px 250px;
 
   .header-wrap {
-    @include margin($l: 10%);
+    margin-left: 10%;
     color: $colorHeader;
 
     .landing-logo img {
@@ -86,46 +35,50 @@ header {
     }
 
     .landing-logo p {
-      @include margin($t: 0, $b: 4.3%);
-      @include padding($l: 49px);
-      @include font($s: 1.2rem, $p: 0.1rem);
+      margin: 0 0 4.3% 0;
+      padding-left: 49px;
+      font-size: 1.2rem;
+      letter-spacing: 0.1rem;
 
       span {
         display: block;
-        @include padding($t: 0.5em, $l: 1em);
+        padding: 0.5em 0 0 1em;
         font-size: 0.4em;
         letter-spacing: 0.1em;
       }
     }
 
     .header_heading {
-      @include margin($reset: true, $b: 3.6%);
+      margin: 0 0 3.6% 0;
       width: 400px;
       position: relative;
-      @include font($s: 3.7rem, $w: bold, $h: 3.8rem);
+      font-weight: bold;
+      font-size: 3.7rem;
+      line-height: 3.8rem;
 
       &:after {
         content: 'awesome';
         height: 43px;
         @include absolute(78px, 0px);
-        @include font($h: 25px);
+        line-height: 25px;
         background-color: $colorBackgroundSticker;
       }
     }
 
     .header_text {
-      @include margin($reset: true, $b: 3.5%);
+      margin: 0 0 3.5% 0;
       width: 37%;
-      @include font($h: 1.3rem);
+      line-height: 1.3rem;
       color: lighten($colorHeader, 2%);
     }
 
     .header_button {
-      @include margin($reset: true, $r: 8.7%);
-      @include padding($t: 12px, $r: 37px, $b: 12px, $l: 37px);
+      margin: 0 8.7% 0 0;
+      padding: 12px 37px 12px 37px;
       border: none;
       border-radius: 5px;
-      @include font($s: 0.8rem, $w: bold);
+      font-weight: bold;
+      font-size: 0.8rem;
       color: white;
       background-color: $colorAuth;
       cursor: pointer;
