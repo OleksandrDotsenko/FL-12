@@ -99,6 +99,7 @@ header {
 
 main {
   max-width: 1600px;
+  min-width: 650px;
 
   .section_text {
     margin: 0 auto 32px auto;
@@ -130,7 +131,7 @@ main {
   }
 
   .section_card_wrap {
-    margin: 0 auto;
+    margin: 0 auto 51px auto;
     max-width: 930px;
     color: white;
 
@@ -172,6 +173,78 @@ main {
             color: white;
           }
         }
+      }
+    }
+  }
+
+  .section_banner {
+    margin: 0 auto;
+    max-width: 1000px;
+    position: relative;
+    bottom: -61px;
+    height: 120px;
+    border-radius: 5px;
+    background-color: $colorBackgroundGradientStart;
+    background: linear-gradient(
+      to right,
+      $colorBackgroundGradientStart,
+      $colorBackgroundGradientEnd
+    );
+
+    .section_banner_text_wrap {
+      margin: 0 auto;
+      width: 73%;
+
+      .section_banner_heading {
+        margin: 0 0 15px 0;
+        width: 350px;
+        padding-top: 22px;
+        color: $colorHeader;
+        font-size: 1.6rem;
+        font-weight: bold;
+        position: relative;
+
+        &:before {
+          content: '';
+          width: 53px;
+          height: 41px;
+          position: absolute;
+          bottom: 0;
+          left: 102px;
+          background-color: $colorBackgroundSticker;
+          z-index: 1;
+        }
+
+        &:after {
+          content: 'start';
+          position: absolute;
+          bottom: 0;
+          left: 104px;
+          z-index: 2;
+        }
+      }
+
+      .section_banner_text {
+        margin: 0;
+        color: lightgrey;
+      }
+    }
+
+    .section_banner_button {
+      padding: 12px 37px 12px 37px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 0.8rem;
+      color: white;
+      background-color: $colorAuth;
+      cursor: pointer;
+      position: absolute;
+      top: 33.1%;
+      right: 13.5%;
+
+      &:hover {
+        background-color: lighten($colorAuth, 5%);
       }
     }
   }
