@@ -22,6 +22,7 @@ header {
   max-width: 1600px;
   height: 583px;
   padding-top: 17px;
+  margin-bottom: 33px;
   background: $imageBackgroundHeader center;
   border-bottom-right-radius: 650px 250px;
 
@@ -102,6 +103,42 @@ header {
 
 main {
   max-width: 1600px;
+  // background-color: red;
+
+  .section_text {
+    margin: 0 auto 32px auto;
+    width: 350px;
+    font-size: 2.2rem;
+    color: $colorSectionText;
+    text-align: center;
+    position: relative;
+
+    &:before {
+      content: '';
+      width: 152px;
+      height: 42px;
+      position: absolute;
+      bottom: 5px;
+      right: 14px;
+      background-color: $colorBackgroundSticker;
+      z-index: 1;
+    }
+
+    &:after {
+      content: 'adventure';
+      height: 40px;
+      position: absolute;
+      bottom: 0;
+      right: 14px;
+      z-index: 2;
+    }
+  }
+
+  .section_card_wrap {
+    margin: 0 auto;
+    width: 900px;
+    // background-color: green;
+  }
 }
 
 footer {
