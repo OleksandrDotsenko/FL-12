@@ -9,7 +9,7 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 14px;
   color: black;
-  background-color: $colorBackground;
+  background-color: $colorBG;
 }
 
 header {
@@ -17,7 +17,7 @@ header {
   height: 583px;
   padding-top: 17px;
   margin-bottom: 33px;
-  background: $imageBackgroundHeader center;
+  background: $imageBGHeader center;
   border-bottom-right-radius: 650px 250px;
 
   .header-wrap {
@@ -58,7 +58,7 @@ header {
         top: 78px;
         left: 0px;
         line-height: 25px;
-        background-color: $colorBackgroundSticker;
+        background-color: $colorBGSticker;
       }
     }
 
@@ -77,11 +77,11 @@ header {
       font-weight: bold;
       font-size: 0.8rem;
       color: white;
-      background-color: $colorAuth;
+      background-color: $colorBGBtn;
       cursor: pointer;
 
       &:hover {
-        background-color: lighten($colorAuth, 5%);
+        background-color: lighten($colorBGBtn, 5%);
       }
     }
 
@@ -91,7 +91,7 @@ header {
 
       &:hover {
         text-decoration: none;
-        color: lighten($colorAuth, 5%);
+        color: lighten($colorBGBtn, 5%);
       }
     }
   }
@@ -116,7 +116,7 @@ main {
       position: absolute;
       bottom: 5px;
       right: 14px;
-      background-color: $colorBackgroundSticker;
+      background-color: $colorBGSticker;
       z-index: 1;
     }
 
@@ -136,7 +136,7 @@ main {
     color: white;
 
     .section_card {
-      background-color: $colorBackgroundCard;
+      background-color: $colorBGCard;
       margin-bottom: 20px;
       padding: 17px;
       display: flex;
@@ -184,11 +184,11 @@ main {
     bottom: -61px;
     height: 120px;
     border-radius: 5px;
-    background-color: $colorBackgroundGradientStart;
+    background-color: $colorBGGradientStart;
     background: linear-gradient(
       to right,
-      $colorBackgroundGradientStart,
-      $colorBackgroundGradientEnd
+      $colorBGGradientStart,
+      $colorBGGradientEnd
     );
 
     .section_banner_text_wrap {
@@ -211,7 +211,7 @@ main {
           position: absolute;
           bottom: 0;
           left: 102px;
-          background-color: $colorBackgroundSticker;
+          background-color: $colorBGSticker;
           z-index: 1;
         }
 
@@ -237,19 +237,19 @@ main {
       font-weight: bold;
       font-size: 0.8rem;
       color: white;
-      background-color: $colorAuth;
+      background-color: $colorBGBtn;
       cursor: pointer;
       position: absolute;
       top: 33.1%;
       right: 13.5%;
 
       &:hover {
-        background-color: lighten($colorAuth, 5%);
+        background-color: lighten($colorBGBtn, 5%);
       }
     }
   }
 }
 
 footer {
-  background-color: $colorBackgroundFooter;
+  background-color: $colorBGFooter;
 }
