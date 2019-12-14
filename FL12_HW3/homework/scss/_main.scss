@@ -14,31 +14,33 @@ body {
 
 .landing-logo {
   width: 110px;
+  font-family: $fontSecondary;
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
 
   img {
     width: 38px;
+    margin-right: 11px;
   }
 
   p {
     margin: 0;
-    font-size: 1.2rem;
-    letter-spacing: 0.1rem;
+    padding-top: 0.1rem;
+    font-size: 1.25rem;
+    letter-spacing: 0.01rem;
+    font-weight: bolder;
 
     span {
       display: block;
-      padding: 0.5em 0 0 1em;
       font-size: 0.4em;
-      letter-spacing: 0.1em;
+      text-align: center;
+      margin-top: 2px;
     }
   }
 }
 
 header {
   max-width: 1600px;
-  height: 583px;
+  height: 584px;
   padding-top: 17px;
   margin-bottom: 33px;
   background: $imageBGHeader center;
