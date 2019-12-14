@@ -1,12 +1,19 @@
+$content-width: (
+  max: 1600px,
+  min: 650px,
+  fmax: 1280px,
+  fmin: 650px,
+);
+
 html {
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  background-color: #21232e;
+  background-color: $colorBGFooter;
 }
 body {
   margin: 0;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: $fontPrimary;
   font-size: 14px;
   color: black;
   background-color: $colorBG;
@@ -39,7 +46,9 @@ body {
 }
 
 header {
-  max-width: 1600px;
+  margin: 0 auto;
+  max-width: map-get($content-width, max);
+  min-width: map-get($content-width, min);
   height: 584px;
   padding-top: 17px;
   margin-bottom: 33px;
@@ -110,8 +119,9 @@ header {
 }
 
 main {
-  max-width: 1600px;
-  min-width: 650px;
+  margin: 0 auto;
+  max-width: map-get($content-width, max);
+  min-width: map-get($content-width, min);
 
   .section_text {
     margin: 0 auto 32px auto;
@@ -264,29 +274,28 @@ main {
 
 footer {
   background-color: $colorBGFooter;
-  padding: 91px 0 34px 0;
+  padding: 107px 0 40px 0;
   color: #b8babe;
+  font-family: $fontSecondary;
 
   .footer-wrap {
     margin: 0 auto;
-    width: 81%;
+    max-width: map-get($content-width, fmax);
+    min-width: map-get($content-width, fmin);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    justify-content: center;
 
     .footer_logo {
       padding-top: 5px;
-      margin-right: 25px;
     }
 
     .footer_text {
       width: 260px;
-      margin-right: 25px;
-    }
-
-    .footer-cr {
-      padding-right: 63px;
+      margin: 0 auto;
+      font-size: 0.7rem;
+      line-height: 1rem;
+      font-weight: bold;
     }
   }
 }
