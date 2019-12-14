@@ -64,12 +64,13 @@ header {
     }
 
     .header_heading {
-      margin: 0 0 48px 0;
-      width: 400px;
+      margin: 0 0 31px 0;
+      width: 410px;
       position: relative;
       font-weight: bold;
       font-size: 3.7rem;
       line-height: 3.8rem;
+      letter-spacing: 0.03rem;
 
       &:after {
         content: 'awesome';
@@ -83,18 +84,20 @@ header {
     }
 
     .header_text {
-      margin: 0 0 52px 0;
-      max-width: 530px;
+      margin: 0 0 50px 0;
+      max-width: 560px;
       padding-right: 20px;
+      font-family: $fontSecondary;
       line-height: 1.3rem;
       color: lighten($colorHeader, 2%);
+      white-space: pre-line;
     }
 
     .header_button {
       margin: 0 8.7% 0 0;
       padding: 12px 37px 12px 37px;
       border: none;
-      border-radius: 5px;
+      border-radius: 3px;
       font-weight: bold;
       font-size: 0.8rem;
       color: white;
@@ -109,6 +112,7 @@ header {
     a.login {
       color: white;
       font-size: 1rem;
+      letter-spacing: 0.02rem;
 
       &:hover {
         text-decoration: none;
@@ -125,19 +129,20 @@ main {
 
   .section_text {
     margin: 0 auto 32px auto;
-    width: 350px;
+    width: 351px;
     font-size: 2.2rem;
     color: $colorSectionText;
     text-align: center;
     position: relative;
+    font-weight: 600;
 
     &:before {
       content: '';
-      width: 152px;
+      width: 158px;
       height: 42px;
       position: absolute;
       bottom: 5px;
-      right: 14px;
+      right: 12px;
       background-color: $colorBGSticker;
       z-index: 1;
     }
@@ -147,7 +152,7 @@ main {
       height: 40px;
       position: absolute;
       bottom: 0;
-      right: 14px;
+      right: 13px;
       z-index: 2;
     }
   }
@@ -264,7 +269,7 @@ main {
     .section_banner_button {
       padding: 12px 37px 12px 37px;
       border: none;
-      border-radius: 5px;
+      border-radius: 3px;
       font-weight: bold;
       font-size: 0.8rem;
       color: white;
