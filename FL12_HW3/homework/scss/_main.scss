@@ -206,6 +206,9 @@ main {
     bottom: -61px;
     height: 120px;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     background-color: $colorBGGradientStart;
     background: linear-gradient(
       to right,
@@ -214,13 +217,11 @@ main {
     );
 
     .section_banner_text_wrap {
-      margin: 0 auto;
-      width: 73%;
+      align-self: flex-start;
 
       .section_banner_heading {
-        margin: 0 0 15px 0;
+        margin: $marginBannerHeading;
         width: 350px;
-        padding-top: 22px;
         color: $colorHeader;
         font-size: 1.6rem;
         font-weight: bold;
@@ -249,6 +250,7 @@ main {
       .section_banner_text {
         margin: 0;
         color: lightgrey;
+        font-family: $fontSecondary;
       }
     }
 
@@ -261,9 +263,9 @@ main {
       color: white;
       background-color: $colorBGBtn;
       cursor: pointer;
-      position: absolute;
-      top: 33.1%;
-      right: 13.5%;
+      // position: absolute;
+      // top: 33.1%;
+      // right: 13.5%;
 
       &:hover {
         background-color: lighten($colorBGBtn, 5%);
