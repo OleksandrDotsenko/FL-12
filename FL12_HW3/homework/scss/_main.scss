@@ -162,16 +162,21 @@ main {
       margin-bottom: 20px;
       padding: 17px;
       display: flex;
-      align-items: center;
+      align-items: stretch;
       border-radius: 5px;
 
       .section_card_img {
-        width: 91%;
+        width: 95%;
       }
 
       .section_card_right_container {
         text-align: center;
         color: #b8babe;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-top: 5%;
+        padding-bottom: 3%;
 
         .section_card_heading {
           margin: 0;
@@ -181,10 +186,12 @@ main {
         }
 
         .section_card_text {
-          margin: 6% auto 4% auto;
-          width: 73%;
+          margin: 0 auto;
+          width: 74%;
+          padding-top: 3%;
           text-align: justify;
-          line-height: 1.3rem;
+          line-height: 1.2rem;
+          font-family: $fontSecondary;
         }
 
         a {
@@ -263,9 +270,6 @@ main {
       color: white;
       background-color: $colorBGBtn;
       cursor: pointer;
-      // position: absolute;
-      // top: 33.1%;
-      // right: 13.5%;
 
       &:hover {
         background-color: lighten($colorBGBtn, 5%);
