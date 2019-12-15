@@ -130,7 +130,8 @@ main .section_card_wrap {
     align-items: stretch;
     border-radius: 5px; }
     main .section_card_wrap .section_card .section_card_img {
-      width: 95%; }
+      width: 95%;
+      border-radius: 5px; }
     main .section_card_wrap .section_card .section_card_right_container {
       text-align: center;
       color: #b8babe;
