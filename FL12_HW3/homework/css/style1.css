@@ -1,0 +1,232 @@
+html {
+  line-height: 1.15;
+  background-color: #21232e; }
+
+body {
+  margin: 0;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 14px;
+  color: black;
+  background-color: #ffffff; }
+
+.landing-logo {
+  width: 110px;
+  font-family: "Hind", sans-serif;
+  display: flex; }
+  .landing-logo img {
+    width: 38px;
+    margin-right: 11px; }
+  .landing-logo p {
+    margin: 0;
+    padding-top: 0.1rem;
+    font-size: 1.25rem;
+    letter-spacing: 0.01rem;
+    font-weight: bolder; }
+    .landing-logo p span {
+      display: block;
+      font-size: 0.4em;
+      text-align: center;
+      margin-top: 2px; }
+
+.container, header, main {
+  margin: 0 auto;
+  max-width: 1600px;
+  min-width: 650px; }
+
+header {
+  height: 584px;
+  padding-top: 17px;
+  margin-bottom: 33px;
+  background: url("../img/m-h-day.jpg") center;
+  border-bottom-right-radius: 650px 250px; }
+  header .header-wrap {
+    margin-left: 10%;
+    color: #2c2f3c; }
+    header .header-wrap .landing-logo {
+      margin-bottom: 59px; }
+    header .header-wrap .header_heading {
+      margin: 0 0 31px 0;
+      width: 410px;
+      position: relative;
+      font-weight: bold;
+      font-size: 3.7rem;
+      line-height: 3.8rem;
+      letter-spacing: 0.03rem; }
+      header .header-wrap .header_heading:before {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        width: 252px;
+        height: 41px;
+        left: 0;
+        bottom: 0;
+        background-color: #13a0c7; }
+      header .header-wrap .header_heading:after {
+        content: "awesome";
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        bottom: 0; }
+    header .header-wrap .header_text {
+      margin: 0 0 50px 0;
+      max-width: 560px;
+      padding-right: 20px;
+      font-family: "Hind", sans-serif;
+      line-height: 1.3rem;
+      color: #303442;
+      white-space: pre-line; }
+    header .header-wrap .header_button {
+      margin-right: 8.7%;
+      padding: 12px 37px 12px 37px;
+      border: none;
+      border-radius: 3px;
+      font-weight: bold;
+      font-size: 0.8rem;
+      color: white;
+      background-color: #699900;
+      cursor: pointer; }
+      header .header-wrap .header_button:hover {
+        background-color: #7bb300; }
+    header .header-wrap .login {
+      font-size: 1rem;
+      letter-spacing: 0.02rem;
+      color: #ffffff; }
+      header .header-wrap .login:hover {
+        text-decoration: none;
+        color: #7bb300; }
+
+main .section_text {
+  margin: 0 auto 32px auto;
+  width: 351px;
+  font-size: 2.2rem;
+  color: #21232e;
+  text-align: center;
+  position: relative;
+  font-weight: 600; }
+  main .section_text:before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    width: 159px;
+    height: 42px;
+    left: 181px;
+    bottom: 5px;
+    background-color: #13a0c7; }
+  main .section_text:after {
+    content: "adventure";
+    position: absolute;
+    z-index: 2;
+    left: 183px;
+    bottom: 0; }
+main .section_card_wrap {
+  margin: 0 auto 51px auto;
+  max-width: 930px;
+  color: white; }
+  main .section_card_wrap .section_card {
+    background-color: #21232e;
+    margin-bottom: 20px;
+    padding: 17px;
+    display: flex;
+    align-items: stretch;
+    border-radius: 5px; }
+    main .section_card_wrap .section_card .section_card_img {
+      width: 95%; }
+    main .section_card_wrap .section_card .section_card_right_container {
+      text-align: center;
+      color: #b8babe;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: 5%;
+      padding-bottom: 3%; }
+      main .section_card_wrap .section_card .section_card_right_container .section_card_heading {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: white; }
+      main .section_card_wrap .section_card .section_card_right_container .section_card_text {
+        margin: 0 auto;
+        width: 74%;
+        padding-top: 3%;
+        text-align: justify;
+        line-height: 1.2rem;
+        font-family: "Hind", sans-serif; }
+      main .section_card_wrap .section_card .section_card_right_container .section_link {
+        width: 100px;
+        margin: 0 auto;
+        color: #b8babe; }
+        main .section_card_wrap .section_card .section_card_right_container .section_link:hover {
+          text-decoration: none;
+          color: white; }
+main .section_banner {
+  margin: 0 auto;
+  max-width: 1000px;
+  position: relative;
+  bottom: -61px;
+  height: 120px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #679705;
+  background: linear-gradient(to right, #679705, #305fd1); }
+  main .section_banner .section_banner_text_wrap {
+    align-self: flex-start; }
+    main .section_banner .section_banner_text_wrap .section_banner_heading {
+      margin: 23px 0 17px 0;
+      width: 350px;
+      color: #2c2f3c;
+      font-size: 1.6rem;
+      font-weight: bold;
+      position: relative; }
+      main .section_banner .section_banner_text_wrap .section_banner_heading:before {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        width: 54px;
+        height: 41px;
+        left: 103px;
+        bottom: 0;
+        background-color: #13a0c7; }
+      main .section_banner .section_banner_text_wrap .section_banner_heading:after {
+        content: "start";
+        position: absolute;
+        z-index: 2;
+        left: 104px;
+        bottom: 0; }
+    main .section_banner .section_banner_text_wrap .section_banner_text {
+      margin: 0;
+      color: lightgrey;
+      font-family: "Hind", sans-serif; }
+  main .section_banner .section_banner_button {
+    padding: 12px 37px 12px 37px;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: white;
+    background-color: #699900;
+    cursor: pointer; }
+    main .section_banner .section_banner_button:hover {
+      background-color: #7bb300; }
+
+footer {
+  background-color: #21232e;
+  padding: 107px 0 40px 0;
+  color: #b9bbcc;
+  font-family: "Hind", sans-serif; }
+  footer .footer-wrap {
+    margin: 0 auto;
+    max-width: 1280px;
+    min-width: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    footer .footer-wrap .footer_logo {
+      padding-top: 5px; }
+    footer .footer-wrap .footer_text {
+      width: 260px;
+      margin: 0 auto;
+      font-size: 0.7rem;
+      line-height: 1rem;
+      font-weight: bold; }
