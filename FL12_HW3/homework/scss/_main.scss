@@ -5,6 +5,36 @@ $content-width: (
   fmin: 650px,
 );
 
+$thin-space: (
+  low: 0.03rem,
+  middle: 0.02rem,
+  high: 0.01rem,
+);
+
+@mixin button {
+  padding: 12px 37px 12px 37px;
+  border: none;
+  border-radius: 3px;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: white;
+  background-color: $colorBGBtn;
+  cursor: pointer;
+
+  &:hover {
+    background-color: lighten($colorBGBtn, 5%);
+  }
+}
+
+@mixin link($color: #ffffff, $hcolor: #ffffff) {
+  color: $color;
+
+  &:hover {
+    text-decoration: none;
+    color: lighten($hcolor, 5%);
+  }
+}
+
 html {
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
@@ -33,7 +63,7 @@ body {
     margin: 0;
     padding-top: 0.1rem;
     font-size: 1.25rem;
-    letter-spacing: 0.01rem;
+    letter-spacing: map-get($thin-space, high);
     font-weight: bolder;
 
     span {
@@ -70,7 +100,7 @@ header {
       font-weight: bold;
       font-size: 3.7rem;
       line-height: 3.8rem;
-      letter-spacing: 0.03rem;
+      letter-spacing: map-get($thin-space, low);
 
       &:after {
         content: 'awesome';
@@ -94,30 +124,15 @@ header {
     }
 
     .header_button {
-      margin: 0 8.7% 0 0;
-      padding: 12px 37px 12px 37px;
-      border: none;
-      border-radius: 3px;
-      font-weight: bold;
-      font-size: 0.8rem;
-      color: white;
-      background-color: $colorBGBtn;
-      cursor: pointer;
+      margin-right: 8.7%;
 
-      &:hover {
-        background-color: lighten($colorBGBtn, 5%);
-      }
+      @include button;
     }
 
-    a.login {
-      color: white;
+    .login {
       font-size: 1rem;
-      letter-spacing: 0.02rem;
-
-      &:hover {
-        text-decoration: none;
-        color: lighten($colorBGBtn, 5%);
-      }
+      letter-spacing: map-get($thin-space, middle);
+      @include link($hcolor: $colorBGBtn);
     }
   }
 }
@@ -176,7 +191,7 @@ main {
 
       .section_card_right_container {
         text-align: center;
-        color: #b8babe;
+        color: $colorCardContent;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -199,13 +214,10 @@ main {
           font-family: $fontSecondary;
         }
 
-        a {
-          color: inherit;
-
-          &:hover {
-            text-decoration: none;
-            color: white;
-          }
+        .section_link {
+          width: 100px;
+          margin: 0 auto;
+          @include link($colorCardContent);
         }
       }
     }
@@ -267,18 +279,7 @@ main {
     }
 
     .section_banner_button {
-      padding: 12px 37px 12px 37px;
-      border: none;
-      border-radius: 3px;
-      font-weight: bold;
-      font-size: 0.8rem;
-      color: white;
-      background-color: $colorBGBtn;
-      cursor: pointer;
-
-      &:hover {
-        background-color: lighten($colorBGBtn, 5%);
-      }
+      @include button;
     }
   }
 }
