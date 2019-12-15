@@ -75,10 +75,14 @@ body {
   }
 }
 
-header {
+.container {
   margin: 0 auto;
   max-width: map-get($content-width, max);
   min-width: map-get($content-width, min);
+}
+
+header {
+  @extend .container;
   height: 584px;
   padding-top: 17px;
   margin-bottom: 33px;
@@ -138,9 +142,7 @@ header {
 }
 
 main {
-  margin: 0 auto;
-  max-width: map-get($content-width, max);
-  min-width: map-get($content-width, min);
+  @extend .container;
 
   .section_text {
     margin: 0 auto 32px auto;
