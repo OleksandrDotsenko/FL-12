@@ -18,11 +18,11 @@ $thin-space: (
   font-weight: bold;
   font-size: 0.8rem;
   color: white;
-  background-color: $colorBGBtn;
+  background-color: $color-bg-btn;
   cursor: pointer;
 
   &:hover {
-    background-color: lighten($colorBGBtn, 5%);
+    background-color: lighten($color-bg-btn, 5%);
   }
 }
 
@@ -52,7 +52,7 @@ $thin-space: (
     height: $rect-height;
     left: $rect-left;
     bottom: $rect-bottom;
-    background-color: $colorBGSticker;
+    background-color: $color-bg-sticker;
   }
 
   &:after {
@@ -68,19 +68,19 @@ html {
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  background-color: $colorBGFooter;
+  background-color: $color-bg-footer;
 }
 body {
   margin: 0;
-  font-family: $fontPrimary;
+  font-family: $font-primary;
   font-size: 14px;
   color: black;
-  background-color: $colorBG;
+  background-color: $color-bg;
 }
 
 .landing-logo {
   width: 110px;
-  font-family: $fontSecondary;
+  font-family: $font-secondary;
   display: flex;
 
   img {
@@ -115,12 +115,12 @@ header {
   height: 584px;
   padding-top: 17px;
   margin-bottom: 33px;
-  background: $imageBGHeader center;
+  background: $image-bg-header center;
   border-bottom-right-radius: 650px 250px;
 
   .header-wrap {
     margin-left: 10%;
-    color: $colorHeader;
+    color: $color-header;
 
     .landing-logo {
       margin-bottom: 59px;
@@ -142,9 +142,9 @@ header {
       margin: 0 0 50px 0;
       max-width: 560px;
       padding-right: 20px;
-      font-family: $fontSecondary;
+      font-family: $font-secondary;
       line-height: 1.3rem;
-      color: lighten($colorHeader, 2%);
+      color: lighten($color-header, 2%);
       white-space: pre-line;
     }
 
@@ -157,7 +157,7 @@ header {
     .login {
       font-size: 1rem;
       letter-spacing: map-get($thin-space, middle);
-      @include link($hcolor: $colorBGBtn);
+      @include link($hcolor: $color-bg-btn);
     }
   }
 }
@@ -169,7 +169,7 @@ main {
     margin: 0 auto 32px auto;
     width: 351px;
     font-size: 2.2rem;
-    color: $colorSectionText;
+    color: $color-section-text;
     text-align: center;
     position: relative;
     font-weight: 600;
@@ -183,7 +183,7 @@ main {
     color: white;
 
     .section_card {
-      background-color: $colorBGCard;
+      background-color: $color-bg-card;
       margin-bottom: 20px;
       padding: 17px;
       display: flex;
@@ -196,7 +196,7 @@ main {
 
       .section_card_right_container {
         text-align: center;
-        color: $colorCardContent;
+        color: $color-card-content;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -216,13 +216,13 @@ main {
           padding-top: 3%;
           text-align: justify;
           line-height: 1.2rem;
-          font-family: $fontSecondary;
+          font-family: $font-secondary;
         }
 
         .section_link {
           width: 100px;
           margin: 0 auto;
-          @include link($colorCardContent);
+          @include link($color-card-content);
         }
       }
     }
@@ -238,20 +238,20 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background-color: $colorBGGradientStart;
+    background-color: $color-bg-gradient-start;
     background: linear-gradient(
       to right,
-      $colorBGGradientStart,
-      $colorBGGradientEnd
+      $color-bg-gradient-start,
+      $color-bg-gradient-end
     );
 
     .section_banner_text_wrap {
       align-self: flex-start;
 
       .section_banner_heading {
-        margin: $marginBannerHeading;
+        margin: $margin-banner-heading;
         width: 350px;
-        color: $colorHeader;
+        color: $color-header;
         font-size: 1.6rem;
         font-weight: bold;
         position: relative;
@@ -262,7 +262,7 @@ main {
       .section_banner_text {
         margin: 0;
         color: lightgrey;
-        font-family: $fontSecondary;
+        font-family: $font-secondary;
       }
     }
 
@@ -273,10 +273,10 @@ main {
 }
 
 footer {
-  background-color: $colorBGFooter;
+  background-color: $color-bg-footer;
   padding: 107px 0 40px 0;
   color: #b8babe;
-  font-family: $fontSecondary;
+  font-family: $font-secondary;
 
   .footer-wrap {
     margin: 0 auto;
