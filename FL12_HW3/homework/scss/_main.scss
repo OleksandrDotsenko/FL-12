@@ -35,6 +35,35 @@ $thin-space: (
   }
 }
 
+@mixin sticker(
+  $text,
+  $rect-width,
+  $rect-height,
+  $rect-left,
+  $rect-bottom,
+  $text-left,
+  $text-bottom
+) {
+  &:before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    width: $rect-width;
+    height: $rect-height;
+    left: $rect-left;
+    bottom: $rect-bottom;
+    background-color: $colorBGSticker;
+  }
+
+  &:after {
+    content: $text;
+    position: absolute;
+    z-index: 2;
+    left: $text-left;
+    bottom: $text-bottom;
+  }
+}
+
 html {
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
@@ -106,15 +135,7 @@ header {
       line-height: 3.8rem;
       letter-spacing: map-get($thin-space, low);
 
-      &:after {
-        content: 'awesome';
-        height: 43px;
-        position: absolute;
-        top: 78px;
-        left: 0px;
-        line-height: 25px;
-        background-color: $colorBGSticker;
-      }
+      @include sticker('awesome', 252px, 41px, 0, 0, 0, 0);
     }
 
     .header_text {
@@ -153,25 +174,7 @@ main {
     position: relative;
     font-weight: 600;
 
-    &:before {
-      content: '';
-      width: 158px;
-      height: 42px;
-      position: absolute;
-      bottom: 5px;
-      right: 12px;
-      background-color: $colorBGSticker;
-      z-index: 1;
-    }
-
-    &:after {
-      content: 'adventure';
-      height: 40px;
-      position: absolute;
-      bottom: 0;
-      right: 13px;
-      z-index: 2;
-    }
+    @include sticker('adventure', 159px, 42px, 181px, 5px, 183px, 0);
   }
 
   .section_card_wrap {
@@ -253,24 +256,7 @@ main {
         font-weight: bold;
         position: relative;
 
-        &:before {
-          content: '';
-          width: 53px;
-          height: 41px;
-          position: absolute;
-          bottom: 0;
-          left: 102px;
-          background-color: $colorBGSticker;
-          z-index: 1;
-        }
-
-        &:after {
-          content: 'start';
-          position: absolute;
-          bottom: 0;
-          left: 104px;
-          z-index: 2;
-        }
+        @include sticker('start', 54px, 41px, 103px, 0, 104px, 0);
       }
 
       .section_banner_text {
