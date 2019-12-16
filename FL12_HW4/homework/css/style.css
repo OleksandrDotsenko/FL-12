@@ -16,9 +16,9 @@ strong {
 }
 
 .header {
-  background-color: blue;
   position: sticky;
   top: 0px;
+  background-color: white;
 }
 .header-wrap {
   margin: 0 auto;
@@ -26,26 +26,72 @@ strong {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: tomato;
+  flex-wrap: wrap;
 }
-.header .logo {
-  margin: 0;
-  background-color: green;
+.logo {
+  margin: 32px 25px;
+  font-size: 1.2rem;
+  text-transform: uppercase;
 }
-.header .navigation {
-  background-color: yellow;
+.logo-text {
+  font-weight: normal;
+  letter-spacing: 0.25rem;
+  color: #555555;
+}
+.nav-link {
+  color: #777;
+  text-decoration: none;
+  letter-spacing: 0.1rem;
+  margin-right: 44px;
+}
+.nav-link:hover {
+  color: #bfba55;
 }
 
 .hero {
   height: 100vh;
-
   background-image: url('/img/home-bg.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('/img/home-bg.jpg');
   background-size: cover;
-  background-position: center center;
+  background-position: bottom center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  overflow: hidden;
 }
-.hero h1,
 .hero p {
   margin: 0;
+}
+.hero-header {
+  font-size: 4.5rem;
+  letter-spacing: 0.02rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+.hero-description {
+  color: #bfb433;
+  font-size: 0.9rem;
+  letter-spacing: 0.13rem;
+}
+.hero-btn {
+  display: block;
+  width: 160px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin: 3.1rem auto 0 auto;
+  border-radius: 40px;
+  background-color: white;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #777;
+  font-size: 0.8rem;
+  letter-spacing: 0.03rem;
+}
+.hero-btn:hover {
+  color: #bfba55;
 }
