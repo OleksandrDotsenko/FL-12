@@ -1,0 +1,51 @@
+html {
+  line-height: 1.15;
+}
+body {
+  margin: 0;
+  font-size: 16px;
+  font-family: 'Times New Roman', Times, serif;
+}
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+b,
+strong {
+  font-weight: bolder;
+}
+
+.header {
+  background-color: blue;
+  position: sticky;
+  top: 0px;
+}
+.header-wrap {
+  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: tomato;
+}
+.header .logo {
+  margin: 0;
+  background-color: green;
+}
+.header .navigation {
+  background-color: yellow;
+}
+
+.hero {
+  height: 100vh;
+
+  background-image: url('/img/home-bg.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.hero h1,
+.hero p {
+  margin: 0;
+}
