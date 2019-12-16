@@ -18,6 +18,7 @@ strong {
 .header {
   position: sticky;
   top: 0px;
+  height: 10vh;
   background-color: white;
 }
 .header-wrap {
@@ -27,53 +28,54 @@ strong {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  height: 90%;
 }
 .logo {
-  margin: 32px 25px;
+  margin: 0 30px;
   font-size: 1.2rem;
   text-transform: uppercase;
 }
 .logo-text {
   font-weight: normal;
-  letter-spacing: 0.25rem;
+  letter-spacing: 0.28rem;
   color: #555555;
 }
 .nav-link {
   color: #777;
   text-decoration: none;
-  letter-spacing: 0.1rem;
-  margin-right: 44px;
+  letter-spacing: 0.12rem;
+  margin-right: 40px;
 }
 .nav-link:hover {
   color: #bfba55;
 }
 
 .hero {
-  height: 100vh;
-  background-image: url('/img/home-bg.jpg');
+  height: 90vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url('/img/home-bg.jpg');
   background-size: cover;
-  background-position: bottom center;
+  background-position-y: 10vh;
+  background-position-x: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
   color: white;
-  overflow: hidden;
+  text-align: center;
 }
 .hero p {
   margin: 0;
+}
+.hero-wrap {
+  padding-top: 20%;
 }
 .hero-header {
   font-size: 4.5rem;
   letter-spacing: 0.02rem;
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 1.3%;
 }
 .hero-description {
+  margin: 0;
   color: #bfb433;
   font-size: 0.9rem;
   letter-spacing: 0.13rem;
@@ -81,9 +83,9 @@ strong {
 .hero-btn {
   display: block;
   width: 160px;
-  padding-top: 1rem;
+  padding-top: 0.9rem;
   padding-bottom: 1rem;
-  margin: 3.1rem auto 0 auto;
+  margin: 3% auto 0 auto;
   border-radius: 40px;
   background-color: white;
   text-transform: uppercase;
@@ -91,6 +93,7 @@ strong {
   color: #777;
   font-size: 0.8rem;
   letter-spacing: 0.03rem;
+  text-align: center;
 }
 .hero-btn:hover {
   color: #bfba55;
