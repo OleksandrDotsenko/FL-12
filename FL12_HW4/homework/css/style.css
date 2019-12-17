@@ -110,7 +110,7 @@ strong {
 
 .blog-post {
   padding-top: 5.4rem;
-  padding-bottom: 3.9rem;
+  padding-bottom: 4.1rem;
   border-bottom: 1px solid #cccccc;
 }
 .blog-post:last-child {
@@ -128,7 +128,7 @@ strong {
 .blog-post-props {
   display: flex;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.3rem;
 }
 .blog-post-avatar {
   width: 42px;
@@ -150,7 +150,7 @@ strong {
   width: 188px;
   margin-top: 2.3rem;
   padding-top: 0.9rem;
-  padding-bottom: 1rem;
+  padding-bottom: 0.9rem;
   border-radius: 40px;
   background-color: #ffffff;
   text-decoration: none;
