@@ -4,7 +4,7 @@ html {
 body {
   margin: 0;
   font-size: 16px;
-  font-family: 'Times New Roman', Times, serif;
+  color: #777;
 }
 h1 {
   font-size: 2em;
@@ -19,7 +19,7 @@ strong {
   position: sticky;
   top: 0px;
   height: 10vh;
-  background-color: white;
+  background-color: #ffffff;
 }
 .header-wrap {
   margin: 0 auto;
@@ -38,7 +38,7 @@ strong {
 .logo-text {
   font-weight: normal;
   letter-spacing: 0.28rem;
-  color: #555555;
+  color: #777;
 }
 .nav-link {
   color: #777;
@@ -58,7 +58,7 @@ strong {
   background-position-x: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  color: white;
+  color: #ffffff;
   text-align: center;
   margin-bottom: 1.6rem;
 }
@@ -76,7 +76,7 @@ strong {
 }
 .hero-description {
   margin: 0;
-  color: #bfb433;
+  color: #bfba55;
   font-size: 0.9rem;
   letter-spacing: 0.13rem;
 }
@@ -87,7 +87,7 @@ strong {
   padding-bottom: 1rem;
   margin: 3% auto 0 auto;
   border-radius: 40px;
-  background-color: white;
+  background-color: #ffffff;
   text-transform: uppercase;
   text-decoration: none;
   color: #777;
@@ -96,11 +96,15 @@ strong {
   text-align: center;
 }
 .hero-btn:hover {
-  color: #bfba55;
+  color: #000;
 }
 
 .main-section {
-  max-width: 945px;
+  max-width: 1050px;
+  margin: 0 auto;
+}
+.main-section-wrap {
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -119,6 +123,7 @@ strong {
 .blog-post-header {
   font-size: 2rem;
   margin-bottom: 0.9rem;
+  color: #000;
 }
 .blog-post-props {
   display: flex;
@@ -147,29 +152,33 @@ strong {
   padding-top: 0.9rem;
   padding-bottom: 1rem;
   border-radius: 40px;
-  background-color: white;
+  background-color: #ffffff;
   text-decoration: none;
-  color: #777777;
+  color: #777;
   font-size: 1rem;
   letter-spacing: 0.05rem;
   text-align: center;
-  border: 1px solid #cccccc;
+  border: 1px solid #777;
   font-weight: bolder;
 }
 .continue-btn:hover {
-  color: #bfba55;
-  border-color: #bfba55;
+  color: #000;
+  border-color: #000;
 }
 
 .footer {
   margin-top: 3.1rem;
-  background-color: black;
+  background-color: #000;
 }
 .footer-wrap {
   color: #777;
-  max-width: 945px;
+  max-width: 1050px;
+  margin: 0 auto;
   padding-top: 5.9rem;
   padding-bottom: 5.8rem;
+}
+.footer-inner {
+  width: 90%;
   margin: 0 auto;
   display: flex;
   flex-flow: row wrap;
@@ -188,7 +197,7 @@ strong {
 
 .footer-header {
   margin: 0 0 0.9rem 0;
-  color: white;
+  color: #ffffff;
   font-size: 2rem;
   font-weight: normal;
 }
@@ -211,6 +220,6 @@ strong {
   text-decoration: none;
 }
 .footer .mail-link:hover {
-  color: white;
+  color: #ffffff;
   text-decoration: underline;
 }
