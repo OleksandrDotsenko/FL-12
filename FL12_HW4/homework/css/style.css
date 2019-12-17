@@ -52,8 +52,7 @@ strong {
 
 .hero {
   height: 90vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url('/img/home-bg.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/img/home-bg.jpg');
   background-size: cover;
   background-position-y: 10vh;
   background-position-x: center;
@@ -61,6 +60,7 @@ strong {
   background-attachment: fixed;
   color: white;
   text-align: center;
+  margin-bottom: 1.6rem;
 }
 .hero p {
   margin: 0;
@@ -97,4 +97,66 @@ strong {
 }
 .hero-btn:hover {
   color: #bfba55;
+}
+
+.main-section {
+  max-width: 945px;
+  margin: 0 auto;
+}
+
+.blog-post {
+  padding-top: 5.4rem;
+  padding-bottom: 3.9rem;
+  border-bottom: 1px solid #cccccc;
+}
+.blog-post:last-child {
+  border-bottom: none;
+}
+.blog-post-img {
+  width: 100%;
+  margin-bottom: 0.4rem;
+}
+.blog-post-header {
+  font-size: 2rem;
+  margin-bottom: 0.9rem;
+}
+.blog-post-props {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.blog-post-avatar {
+  width: 42px;
+  border-radius: 50%;
+  margin-right: 0.4rem;
+}
+.blog-post-author {
+  margin-right: 1.6rem;
+  font-style: normal;
+}
+.blog-post-time {
+  margin-right: 1rem;
+}
+.blog-entry {
+  line-height: 1.6rem;
+}
+.continue-btn {
+  display: block;
+  width: 188px;
+  margin-top: 2.3rem;
+  padding-top: 0.9rem;
+  padding-bottom: 1rem;
+  border-radius: 40px;
+  background-color: white;
+  text-decoration: none;
+  color: #777777;
+  font-size: 1rem;
+  letter-spacing: 0.05rem;
+  text-align: center;
+  border: 1px solid #cccccc;
+  font-weight: bolder;
+}
+.continue-btn:hover {
+  color: #bfba55;
+  border-color: #bfba55;
 }
