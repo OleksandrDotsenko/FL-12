@@ -95,6 +95,7 @@ strong {
   background-size: cover;
   height: 500px;
   position: relative;
+  margin-bottom: 1.5%;
 }
 .hero-wrap {
   position: absolute;
@@ -121,6 +122,7 @@ strong {
   flex: 3;
 }
 .aside {
+  margin-left: 1.5%;
   flex: 1;
 }
 
@@ -136,16 +138,31 @@ strong {
   display: block;
 }
 .post-description {
-  padding: 3% 2%;
+  position: relative;
 }
 .post-header {
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.7rem 0;
   font-weight: 300;
+  line-height: 1.6rem;
 }
 .post-entry {
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   line-height: 1rem;
+}
+.post-time {
+  position: absolute;
+  top: 5%;
+  color: white;
+  font-weight: 100;
+  text-align: center;
+  font-size: 1.7rem;
+  opacity: 0.5;
+}
+.post-time span {
+  display: block;
+  text-transform: lowercase;
+  font-size: 1rem;
 }
 .post:nth-child(odd) {
   text-align: left;
@@ -153,15 +170,53 @@ strong {
 .post:nth-child(even) {
   text-align: right;
 }
+.post:nth-child(odd) .post-description {
+  padding: 3% 7% 3% 3%;
+}
 .post:nth-child(odd) .post-img {
   float: left;
-  margin: 0 4% 0 0;
+  margin: 0 3% 0 0;
+}
+.post:nth-child(odd) .post-time {
+  right: 1.5%;
+}
+.post:nth-child(even) .post-description {
+  padding: 3% 3% 3% 7%;
 }
 .post:nth-child(even) .post-img {
   float: right;
-  margin: 0 0 0 4%;
+  margin: 0 0 0 3%;
+}
+.post:nth-child(even) .post-time {
+  left: 1.5%;
 }
 
+.news {
+  background-color: white;
+  color: #0b192f;
+}
+.news-img img {
+  max-width: 100%;
+  display: block;
+}
+.news-description {
+  padding: 12% 12%;
+}
+.news-header {
+  margin: 0 0 8% 0;
+  font-weight: 300;
+  color: #6c7482;
+}
+.news-entry {
+  margin: 0;
+  font-size: 0.6rem;
+  line-height: 0.9rem;
+  color: #637693;
+}
+
+/* max-width: 1400px (for the desktop) */
+
+/* max-width: 768px (for the tablet) */
 @media screen and (max-width: 768px) {
   .main {
     flex: 2;
@@ -171,27 +226,110 @@ strong {
     max-height: 345px;
     overflow: hidden;
   }
+  .post-header {
+    margin: 0 13% 5% 0;
+    font-weight: 300;
+    font-size: 2.3rem;
+    line-height: 2.3rem;
+    opacity: 0.8;
+  }
+  .post-entry {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+    opacity: 0.7;
+  }
+  .post-time {
+    top: 10%;
+    font-size: 2.3rem;
+    opacity: 0.4;
+  }
+  .post-time span {
+    font-size: 1.2rem;
+  }
   .post:nth-child(odd) {
     text-align: left;
   }
   .post:nth-child(even) {
     text-align: left;
   }
+  .post:nth-child(odd) .post-description {
+    padding: 7% 6%;
+  }
   .post:nth-child(odd) .post-img {
     float: none;
     margin: 0;
+  }
+  .post:nth-child(odd) .post-time {
+    right: 4%;
+  }
+  .post:nth-child(even) .post-description {
+    padding: 7% 6%;
   }
   .post:nth-child(even) .post-img {
     float: none;
     margin: 0;
   }
+  .post:nth-child(even) .post-time {
+    right: 4%;
+    left: auto;
+  }
+  .post:last-child .post-header {
+    margin-right: 0;
+  }
+  .post:last-child .post-entry {
+    margin-bottom: 30%;
+  }
+  .post:last-child .post-time {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 5%;
+  }
+
+  .news {
+    margin-bottom: 5%;
+  }
+  .news-header {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+  }
+  .news-entry {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+  }
 }
 
+/* max-width: 480px (for the phone screen) */
 @media screen and (max-width: 480px) {
   .content {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
+  }
+  .aside {
+    margin-left: 0;
+  }
+  .post-header {
+    font-size: 2.8rem;
+    line-height: 2.8rem;
+    margin-right: 17%;
+  }
+  .post-entry {
+    font-size: 1rem;
+    line-height: 1.3rem;
+  }
+  .post-time {
+    font-size: 2.8rem;
+  }
+  .post-time span {
+    font-size: 1.5rem;
+  }
+
+  .news-description {
+    padding: 6%;
+  }
+  .news-header {
+    margin-bottom: 3%;
   }
 }
