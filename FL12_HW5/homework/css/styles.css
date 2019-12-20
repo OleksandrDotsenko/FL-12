@@ -125,28 +125,27 @@ strong {
 }
 
 .post {
-  display: flex;
+  overflow: hidden;
 }
 .post-img {
-  width: 103%;
-}
-.post-description {
-  width: 89%;
-  padding: 4%;
+  width: 49.5%;
+  max-height: 170px;
 }
 .post-img img {
   max-width: 100%;
   display: block;
 }
+.post-description {
+  padding: 3% 2%;
+}
 .post-header {
   margin: 0 0 1rem 0;
   font-weight: 300;
-  font-size: 3rem;
-  line-height: 3rem;
 }
 .post-entry {
   margin: 0;
-  line-height: 1.8rem;
+  font-size: 0.8rem;
+  line-height: 1rem;
 }
 .post:nth-child(odd) {
   text-align: left;
@@ -154,6 +153,45 @@ strong {
 .post:nth-child(even) {
   text-align: right;
 }
+.post:nth-child(odd) .post-img {
+  float: left;
+  margin: 0 4% 0 0;
+}
 .post:nth-child(even) .post-img {
-  order: 2;
+  float: right;
+  margin: 0 0 0 4%;
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    flex: 2;
+  }
+  .post-img {
+    width: 100%;
+    max-height: 345px;
+    overflow: hidden;
+  }
+  .post:nth-child(odd) {
+    text-align: left;
+  }
+  .post:nth-child(even) {
+    text-align: left;
+  }
+  .post:nth-child(odd) .post-img {
+    float: none;
+    margin: 0;
+  }
+  .post:nth-child(even) .post-img {
+    float: none;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
 }
