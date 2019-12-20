@@ -14,19 +14,100 @@ body {
   font-family: roboto;
 }
 .post-1 {
-	background: #9d27b0;
+  background: #9d27b0;
 }
 .post-2 {
-	background: #9bb800;
+  background: #9bb800;
 }
 .post-3 {
-	background: #ed5120;
+  background: #ed5120;
 }
 .post-4 {
-	background: #9d27b0;
+  background: #9d27b0;
 }
 .post-5 {
-	background: #2d95bb;
+  background: #2d95bb;
 }
 
 /* Your styles go here */
+html {
+  line-height: 1.15;
+  background-color: var(--bg-color--dark);
+}
+body {
+  margin: 0;
+  font-size: 16px;
+  color: #fff;
+}
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+b,
+strong {
+  font-weight: bolder;
+}
+
+.container {
+  max-width: 1429px;
+  margin: 0 auto;
+}
+.container-wrap {
+  max-width: 98%;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  background-color: var(--bg-color--header);
+}
+.logo {
+  margin: 0 30px;
+}
+.logo-text {
+  font-size: 2rem;
+  font-weight: normal;
+  font-weight: 100;
+}
+.logo-text span {
+  color: #9d27b0;
+}
+.navigation {
+  display: flex;
+  margin-right: 35px;
+}
+.nav-link {
+  color: var(--link);
+  text-decoration: none;
+  padding: 35px 20px;
+  display: block;
+}
+.nav-link:hover {
+  background-color: var(--link--hover);
+}
+
+.hero {
+  background-image: url('/img/post0.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px;
+  position: relative;
+}
+.hero-wrap {
+  position: absolute;
+  left: 25px;
+  bottom: 25px;
+  width: 65%;
+}
+.hero-header {
+  margin: 0 0 1.5rem 0;
+  font-weight: 300;
+  font-size: 3rem;
+}
+.hero-description {
+  margin: 0;
+  line-height: 1.6rem;
+}
