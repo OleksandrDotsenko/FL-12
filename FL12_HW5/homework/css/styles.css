@@ -111,3 +111,49 @@ strong {
   margin: 0;
   line-height: 1.6rem;
 }
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.main {
+  flex: 3;
+}
+.aside {
+  flex: 1;
+}
+
+.post {
+  display: flex;
+}
+.post-img {
+  width: 103%;
+}
+.post-description {
+  width: 89%;
+  padding: 4%;
+}
+.post-img img {
+  max-width: 100%;
+  display: block;
+}
+.post-header {
+  margin: 0 0 1rem 0;
+  font-weight: 300;
+  font-size: 3rem;
+  line-height: 3rem;
+}
+.post-entry {
+  margin: 0;
+  line-height: 1.8rem;
+}
+.post:nth-child(odd) {
+  text-align: left;
+}
+.post:nth-child(even) {
+  text-align: right;
+}
+.post:nth-child(even) .post-img {
+  order: 2;
+}
