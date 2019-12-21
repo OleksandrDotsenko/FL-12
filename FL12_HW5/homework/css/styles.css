@@ -50,7 +50,7 @@ strong {
 
 /* */
 .container {
-  max-width: 640px;
+  max-width: 853px;
   margin: 0 auto;
 }
 .content {
@@ -66,46 +66,99 @@ strong {
 }
 
 .post {
-  overflow: hidden;
+  display: flex;
 }
-.post-img img {
-  width: 237px;
-  height: 160px;
-  display: block;
+.post a {
+  color: #ffffff;
+  text-decoration: none;
+}
+.post:nth-child(even) {
+  flex-direction: row-reverse;
+}
+.post-img {
+  width: 49.5%;
+  height: 215px;
+  position: relative;
+}
+.post-img:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+.post-1 .post-img:hover:after {
+  background: rgba(157, 39, 176, 0.4);
+}
+.post-2 .post-img:hover:after {
+  background: rgba(155, 184, 0, 0.4);
+}
+.post-3 .post-img:hover:after {
+  background: rgba(237, 81, 32, 0.4);
+}
+.post-4 .post-img:hover:after {
+  background: rgba(157, 39, 176, 0.4);
 }
 .post-description {
+  width: 50.5%;
+  padding-top: 4.5%;
+  padding-bottom: 2%;
   position: relative;
-  padding: 4.5% 4.7% 0 0;
+}
+.post-description:hover .post-title {
+  opacity: 0.6;
+}
+.post-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .post-title {
-  margin: 0 0 10px 0;
-  font-weight: 300;
-  font-size: 28px;
-  line-height: 26px;
-  letter-spacing: -1px;
+  margin: 0;
+  margin-bottom: 15px;
+  font-weight: 200;
+  font-size: 35px;
+  line-height: 35px;
+  padding-left: 9%;
+  padding-right: 10%;
 }
 .post-entry {
   margin: 0;
-  font-size: 8px;
-  line-height: 13px;
+  font-size: 11px;
+  line-height: 17px;
+  opacity: 0.6;
+  padding-left: 9%;
+  padding-right: 10%;
 }
 .post-time {
   position: absolute;
-  top: 9px;
+  top: 14px;
   color: #ffffff;
   font-weight: 100;
   text-align: center;
-  font-size: 27px;
+  font-size: 36px;
   opacity: 0.3;
 }
 .post-time span {
   display: block;
   margin-top: 3px;
-  font-size: 14px;
+  font-size: 20px;
   text-transform: lowercase;
 }
 .no-img .post-description {
-  padding: 4.3% 4.3% 4.7% 4.3%;
+  width: 100%;
+  padding-top: 4.3%;
+  padding-bottom: 4.7%;
+}
+.no-img .post-title {
+  padding-left: 4.3%;
+  padding-right: 14%;
+}
+.no-img .post-entry {
+  padding-left: 4.3%;
+  padding-right: 14%;
 }
 .post:nth-child(odd) {
   text-align: left;
@@ -113,25 +166,11 @@ strong {
 .post:nth-child(even) {
   text-align: right;
 }
-.post:nth-child(odd) .post-description {
-  padding-right: 8%;
-}
-.post:nth-child(odd) .post-img {
-  float: left;
-  margin-right: 4.8%;
-}
 .post:nth-child(odd) .post-time {
-  right: 1.7%;
-}
-.post:nth-child(even) .post-description {
-  padding-left: 8%;
-}
-.post:nth-child(even) .post-img {
-  float: right;
-  margin-left: 4.8%;
+  right: 4.8%;
 }
 .post:nth-child(even) .post-time {
-  left: 1.7%;
+  left: 3%;
 }
 
 .news {
@@ -144,17 +183,19 @@ strong {
   display: block;
 }
 .news-description {
-  padding: 11.8% 12% 12% 12%;
+  padding: 13% 12%;
 }
 .news-title {
-  margin: 0 0 4.9% 0;
+  margin: 0;
+  margin-bottom: 4.6%;
   font-weight: 300;
-  font-size: 14px;
+  font-size: 20px;
+  line-height: 21px;
 }
 .news-entry {
   margin: 0;
-  font-size: 8px;
-  line-height: 12px;
+  font-size: 10px;
+  line-height: 16px;
   color: #6c7482;
 }
 
@@ -169,40 +210,42 @@ strong {
   }
   .content .main {
     width: 66%;
-    margin-right: 2.5%;
+    margin-right: 2.7%;
   }
   .content .aside {
-    width: 31.5%;
+    width: 31.3%;
   }
-  .post:nth-child(odd) .post-img,
-  .post:nth-child(even) .post-img {
-    float: none;
-    margin: 0;
-  }
+  .post,
   .post:nth-child(even) {
+    flex-direction: column;
     text-align: left;
   }
-  .post-img img {
-    width: 406px;
+  .post-img {
+    width: 100%;
     height: 241px;
   }
   .post-description {
-    padding: 7.5%;
+    width: 100%;
+    padding-top: 7.7%;
+    padding-bottom: 7.7%;
   }
   .post-title {
     font-weight: 200;
-    margin-bottom: 18px;
-    font-size: 42px;
-    line-height: 41px;
-    width: 90%;
+    font-size: 41px;
+    line-height: 40px;
+    padding-left: 7.5%;
+    padding-right: 20%;
+    letter-spacing: -1px;
+    margin-bottom: 19px;
   }
   .post-entry {
     font-size: 12px;
     line-height: 19px;
-    opacity: 0.6;
+    padding-left: 8%;
+    padding-right: 9%;
   }
   .post-time {
-    top: 14px;
+    top: 15px;
     font-size: 41px;
   }
   .post-time span {
@@ -211,11 +254,20 @@ strong {
   }
   .post:nth-child(odd) .post-time,
   .post:nth-child(even) .post-time {
-    right: 3.4%;
+    right: 3.2%;
     left: auto;
   }
   .no-img .post-description {
-    padding: 7.4% 7.9% 33.5% 7.9%;
+    padding-top: 7.4%;
+    padding-bottom: 33.5%;
+  }
+  .no-img .post-description .post-title {
+    padding-left: 7.5%;
+    padding-right: 16%;
+  }
+  .no-img .post-description .post-entry {
+    padding-left: 8%;
+    padding-right: 9%;
   }
   .post:nth-child(odd).no-img .post-time,
   .post:nth-child(even).no-img .post-time {
@@ -225,13 +277,13 @@ strong {
     bottom: 5.5%;
   }
   .news {
-    margin-bottom: 9%;
+    margin-bottom: 8%;
   }
   .news-description {
-    padding: 15%;
+    padding: 14%;
   }
   .news-title {
-    margin-bottom: 4%;
+    margin-bottom: 5%;
     font-size: 22px;
     line-height: 24px;
     opacity: 0.7;
@@ -261,20 +313,36 @@ strong {
     width: 100%;
   }
   .post-description {
-    padding: 8.4% 8.4% 9% 8.4%;
-  }
-  .no-img .post-description {
-    padding: 8.5% 8.5% 33.5% 8.5%;
+    padding-top: 8.6%;
+    padding-bottom: 8.6%;
   }
   .post-title {
-    font-weight: 200;
-    line-height: 41px;
+    padding-left: 9%;
+    padding-right: 19%;
+    margin-bottom: 19px;
+  }
+  .post-entry {
+    padding-left: 9%;
+    padding-right: 9%;
+    line-height: 19px;
+  }
+  .no-img .post-description {
+    padding-top: 8.2%;
+    padding-bottom: 33.5%;
+  }
+  .no-img .post-description .post-title {
+    padding-left: 8.9%;
+    padding-right: 8.9%;
+  }
+  .no-img .post-description .post-entry {
+    padding-left: 8.7%;
+    padding-right: 8.7%;
   }
   .news {
-    margin-bottom: 4.7%;
+    margin-bottom: 4.3%;
   }
   .news-description {
-    padding: 8%;
+    padding: 8% 8% 7.5% 8%;
   }
   .news-title {
     margin-bottom: 2.8%;
