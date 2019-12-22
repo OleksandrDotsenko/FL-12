@@ -221,6 +221,10 @@ h1 {
 .post:nth-child(even) .post-time {
   left: 3%;
 }
+.post:nth-child(odd).no-img .post-time,
+.post:nth-child(even).no-img .post-time {
+  right: 2.4%;
+}
 
 .news {
   background-color: #ffffff;
