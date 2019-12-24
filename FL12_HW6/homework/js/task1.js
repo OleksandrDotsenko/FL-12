@@ -1,31 +1,28 @@
-const a = parseInt(prompt('Enter A number', 1));
-const b = parseInt(prompt('Enter B number', 1));
-const c = parseInt(prompt('Enter C number', 1));
+let a = prompt('Enter A number', 1);
+let b = prompt('Enter B number', 1);
+let c = prompt('Enter C number', 1);
+a = a === null || a.trim().length <= 0 ? NaN : Number(a);
+b = b === null || b.trim().length <= 0 ? NaN : Number(b);
+c = c === null || c.trim().length <= 0 ? NaN : Number(c);
 
-if (isNaN(a + b + c)) {
-  console.log('Invalid input data');
+if (isNaN(a + b + c) || a === 0) {
+  alert('Invalid input data');
 } else {
-  const DIGITS = 2;
   const SQUARE = 2;
   const FACTOR1 = 4;
   const FACTOR2 = 2;
 
   const discriminant = Math.pow(b, SQUARE) - FACTOR1 * a * c;
 
-  let x1;
-  let x2;
-
   if (discriminant > 0) {
-    x1 = ((-b - Math.sqrt(discriminant)) / (FACTOR2 * a)).toFixed(DIGITS);
-    x2 = ((-b + Math.sqrt(discriminant)) / (FACTOR2 * a)).toFixed(DIGITS);
-  } else if (discriminant === 0) {
-    x1 = (-b / (FACTOR2 * a)).toFixed(DIGITS);
-  }
+    const x1 = Math.round((-b - Math.sqrt(discriminant)) / (FACTOR2 * a));
+    const x2 = Math.round((-b + Math.sqrt(discriminant)) / (FACTOR2 * a));
 
-  if (x1 && x2) {
     console.log(`x1 = ${x1} and x2 = ${x2}`);
-  } else if (x1) {
-    console.log(`x = ${x1}`);
+  } else if (discriminant === 0) {
+    const x = Math.round(-b / (FACTOR2 * a));
+
+    console.log(`x = ${x}`);
   } else {
     console.log(`no solution`);
   }

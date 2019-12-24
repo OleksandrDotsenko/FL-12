@@ -1,8 +1,8 @@
-const a = parseInt(prompt('Enter the length of side A', 1));
-const b = parseInt(prompt('Enter the length of side B', 1));
-const c = parseInt(prompt('Enter the length of side C', 1));
+const a = Number(prompt('Enter the length of side A', 1));
+const b = Number(prompt('Enter the length of side B', 1));
+const c = Number(prompt('Enter the length of side C', 1));
 
-if (isNaN(a + b + c)) {
+if (!Number.isInteger(a) || !Number.isInteger(b) || !Number.isInteger(c)) {
   alert('Input values should be ONLY numbers.');
 } else if (a <= 0 || b <= 0 || c <= 0) {
   alert('A triangle must have 3 sides with a positive definite length.');
