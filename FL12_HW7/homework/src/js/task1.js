@@ -47,7 +47,9 @@ if (!userEmail.length) {
           let userNewPasswordConfirm = prompt('Re-enter your new password', '');
           userNewPasswordConfirm = userNewPasswordConfirm ? userNewPasswordConfirm.trim() : '';
 
-          if (userNewPasswordConfirm !== userNewPassword) {
+          if (!userNewPasswordConfirm.length) {
+            alert('Canceled.');
+          } else if (userNewPasswordConfirm !== userNewPassword) {
             alert('You wrote the wrong password.');
           } else {
             alert('You have successfully changed your password.');
