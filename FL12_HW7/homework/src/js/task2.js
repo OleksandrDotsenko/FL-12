@@ -45,8 +45,6 @@ if (play) {
     attempt = 0;
     pocket_rnd = Math.floor(Math.random() * (pocket_max + 1));
 
-    console.log('answer:', pocket_rnd);
-
     while (attempt < attempts) {
       switch (attempt) {
         case 0:
@@ -68,7 +66,9 @@ if (play) {
       input = prompt(message, '');
       input = input === null || input.trim().length <= 0 ? NaN : Number(input);
 
-      if (!isNaN(input) && input >= pocket_min && input <= pocket_max) {
+      if (isNaN(input)) {
+        attempt++;
+      } else {
         if (input === pocket_rnd) {
           switch (attempt) {
             case 0:
@@ -86,8 +86,6 @@ if (play) {
         } else {
           attempt++;
         }
-      } else {
-        alert('Wrong input!');
       }
     }
 
