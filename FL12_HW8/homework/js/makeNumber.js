@@ -2,7 +2,7 @@ function makeNumber(str) {
   const symbols = str.split('');
   str = '';
   for (let i = 0; i < symbols.length; i++) {
-    if (!isNaN(Number(symbols[i]))) {
+    if (!isNaN(Number(symbols[i])) && symbols[i].trim().length) {
       str += symbols[i];
     }
   }
