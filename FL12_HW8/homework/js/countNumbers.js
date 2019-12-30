@@ -5,7 +5,7 @@ function countNumbers(str) {
 
   for (let i = 0; i < symbols.length; i++) {
     n = symbols[i];
-    if (!isNaN(Number(n))) {
+    if (!isNaN(Number(n)) && symbols[i].trim().length) {
       result[n] = result[n] ? result[n] + 1 : (result[n] = 1);
     }
   }
