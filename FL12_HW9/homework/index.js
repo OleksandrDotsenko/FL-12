@@ -24,31 +24,46 @@ console.log(convert(a, b, c, d));
  * Task 2
  */
 function executeforEach(arr, callback) {
-  arr.forEach(callback);
+  const buffer = [];
+
+  arr.forEach(function(el, index, arr) {
+    const res = callback(el);
+
+    if (typeof res === 'boolean' && res === true) {
+      buffer.push(arr[index]);
+    }
+
+    if (typeof res !== 'undefined' && typeof res !== 'boolean') {
+      buffer[index] = res;
+    }
+  });
+
+  if (buffer) {
+    return buffer;
+  }
 }
 
 const e = 1;
 const f = 2;
 const g = 3;
-const square = 2;
+const factor = 2;
 executeforEach([e, f, g], function(el) {
-  console.log(el * square);
+  console.log(el * factor);
 });
 
 /**
  * Task 3
  */
 function mapArray(arr, callback) {
-  executeforEach(arr, callback);
-  return arr;
+  return executeforEach(arr, callback);
 }
 
 const h = 2;
 const i = '5';
 const j = 8;
-const cube = 3;
+const term = 3;
 console.log(
-  mapArray([h, i, j], function(el, index, arr) {
-    arr[index] = +arr[index] + cube;
+  mapArray([h, i, j], function(el) {
+    return +el + term;
   })
 );
