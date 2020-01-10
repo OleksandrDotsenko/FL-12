@@ -31,3 +31,12 @@ function convert() {
   console.log('Test 11:', convert());
 })();
 */
+
+// Task 2
+function executeforEach(arr, callback) {
+  arr.forEach(callback);
+}
+
+// executeforEach([1, 2, 3], function(el) {
+//   console.log(el * 2);
+// });
