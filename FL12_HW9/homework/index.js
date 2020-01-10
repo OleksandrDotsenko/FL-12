@@ -84,3 +84,18 @@ console.log(
     return el % divider === 0;
   })
 );
+
+/**
+ * Task 7
+ */
+function getArrayOfKeys(arr, keyName) {
+  return executeforEach(arr, function(el) {
+    return el[keyName];
+  });
+}
+
+const actors = [
+  { name: 'tommy', age: 36 },
+  { name: 'lee', age: 28 }
+];
+console.log(getArrayOfKeys(actors, 'name'));
