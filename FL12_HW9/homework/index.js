@@ -67,3 +67,20 @@ console.log(
     return +el + term;
   })
 );
+
+/**
+ * Task 4
+ */
+function filterArray(arr, callback) {
+  return executeforEach(arr, callback);
+}
+
+const k = 2;
+const l = 5;
+const m = 8;
+const divider = 2;
+console.log(
+  filterArray([k, l, m], function(el) {
+    return el % divider === 0;
+  })
+);
