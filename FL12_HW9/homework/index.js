@@ -99,3 +99,22 @@ const actors = [
   { name: 'lee', age: 28 }
 ];
 console.log(getArrayOfKeys(actors, 'name'));
+
+/**
+ * Task 8
+ */
+function substitute(arr) {
+  const limit = 30;
+
+  return mapArray(arr, function(el) {
+    return el < limit ? '*' : el;
+  });
+}
+
+const n = 58;
+const o = 14;
+const p = 48;
+const q = 2;
+const r = 31;
+const s = 29;
+console.log(substitute([n, o, p, q, r, s]));
