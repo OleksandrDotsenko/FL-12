@@ -86,6 +86,19 @@ console.log(
 );
 
 /**
+ * Task 5
+ */
+function flipOver(str) {
+  let result = '';
+  for (let i = str.length - 1; i >= 0; i--) {
+    result += str[i];
+  }
+  return result;
+}
+
+console.log(flipOver('hey world'));
+
+/**
  * Task 7
  */
 function getArrayOfKeys(arr, keyName) {
