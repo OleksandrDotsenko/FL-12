@@ -99,6 +99,31 @@ function flipOver(str) {
 console.log(flipOver('hey world'));
 
 /**
+ * Task 6
+ */
+function makeListFromRange(range) {
+  let result = [];
+
+  if (range && range[0] && range[1]) {
+    for (let i = range[0]; i <= range[1]; i++) {
+      result.push(i);
+    }
+  }
+
+  if (range && range.length === 1) {
+    for (let i = 0; i <= range[0]; i++) {
+      result.push(i);
+    }
+  }
+
+  return result;
+}
+
+const start = 2;
+const end = 7;
+console.log(makeListFromRange([start, end]));
+
+/**
  * Task 7
  */
 function getArrayOfKeys(arr, keyName) {
