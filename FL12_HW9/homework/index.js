@@ -24,23 +24,7 @@ console.log(convert(a, b, c, d));
  * Task 2
  */
 function executeforEach(arr, callback) {
-  const buffer = [];
-
-  arr.forEach(function(el, index, arr) {
-    const res = callback(el);
-
-    if (typeof res === 'boolean' && res === true) {
-      buffer.push(arr[index]);
-    }
-
-    if (typeof res !== 'undefined' && typeof res !== 'boolean') {
-      buffer[index] = res;
-    }
-  });
-
-  if (buffer) {
-    return buffer;
-  }
+  arr.forEach(callback);
 }
 
 const e = 1;
