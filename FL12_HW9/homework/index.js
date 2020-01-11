@@ -183,3 +183,26 @@ const dayC = 365;
 console.log(getPastDay(date, dayA));
 console.log(getPastDay(date, dayB));
 console.log(getPastDay(date, dayC));
+
+/**
+ * Task 10
+ */
+function formatDate(date) {
+  const YYYY = date.getFullYear();
+  const M = date.getMonth() + 1;
+  const d = date.getDate();
+  let HH = date.getHours();
+  let mm = date.getMinutes();
+
+  if ((HH + '').length === 1) {
+    HH = '0' + HH;
+  }
+  if ((mm + '').length === 1) {
+    mm = '0' + mm;
+  }
+
+  return `${YYYY}/${M}/${d} ${HH}:${mm}`;
+}
+
+console.log(formatDate(new Date('6/15/2018 09:15:00')));
+console.log(formatDate(new Date()));
