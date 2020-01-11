@@ -59,8 +59,16 @@ console.log(
 /**
  * Task 4
  */
-function filterArray(arr, callback) {
-  return executeforEach(arr, callback);
+function filterArray(arr, action) {
+  const filteredArr = [];
+
+  executeforEach(arr, function(el) {
+    if (action(el)) {
+      filteredArr.push(el);
+    }
+  });
+
+  return filteredArr;
 }
 
 const k = 2;
