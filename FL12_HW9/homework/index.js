@@ -161,3 +161,25 @@ const q = 2;
 const r = 31;
 const s = 29;
 console.log(substitute([n, o, p, q, r, s]));
+
+/**
+ * Task 9
+ */
+function getPastDay(date, daysAgo) {
+  const milliseconds = 86400000;
+  const timestamp = Date.parse(date);
+  const pastDate = new Date(timestamp - milliseconds * daysAgo);
+  return pastDate.getDate();
+}
+
+const dateYear = 2019;
+const dateMonth = 0;
+const dateDay = 2;
+const date = new Date(dateYear, dateMonth, dateDay);
+
+const dayA = 1;
+const dayB = 2;
+const dayC = 365;
+console.log(getPastDay(date, dayA));
+console.log(getPastDay(date, dayB));
+console.log(getPastDay(date, dayC));
