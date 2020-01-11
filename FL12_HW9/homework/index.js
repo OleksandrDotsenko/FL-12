@@ -38,8 +38,12 @@ executeforEach([e, f, g], function(el) {
 /**
  * Task 3
  */
-function mapArray(arr, callback) {
-  return executeforEach(arr, callback);
+function mapArray(arr, action) {
+  executeforEach(arr, function(el, index, arr) {
+    arr[index] = action(el);
+  });
+
+  return arr;
 }
 
 const h = 2;
