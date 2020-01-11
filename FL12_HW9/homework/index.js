@@ -24,7 +24,9 @@ console.log(convert(a, b, c, d));
  * Task 2
  */
 function executeforEach(arr, callback) {
-  arr.forEach(callback);
+  for (let i = 0; i < arr.length; i++) {
+    callback(arr[i], i, arr);
+  }
 }
 
 const e = 1;
