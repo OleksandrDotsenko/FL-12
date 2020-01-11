@@ -145,10 +145,13 @@ console.log(getArrayOfKeys(actors, 'name'));
  */
 function substitute(arr) {
   const limit = 30;
+  const resultArr = [];
 
-  return mapArray(arr, function(el) {
-    return el < limit ? '*' : el;
+  mapArray(arr, function(el) {
+    resultArr.push(el < limit ? '*' : el);
   });
+
+  return resultArr;
 }
 
 const n = 58;
