@@ -190,20 +190,21 @@ console.log(getPastDay(date, dayC));
  * Task 10
  */
 function formatDate(date) {
+  const PAD = 10;
   const YYYY = date.getFullYear();
   const M = date.getMonth() + 1;
   const d = date.getDate();
   let HH = date.getHours();
   let mm = date.getMinutes();
 
-  if ((HH + '').length === 1) {
+  if (HH < PAD) {
     HH = '0' + HH;
   }
-  if ((mm + '').length === 1) {
+  if (mm < PAD) {
     mm = '0' + mm;
   }
 
-  return `${YYYY}/${M}/${d} ${HH}:${mm}`;
+  return YYYY + '/' + M + '/' + d + ' ' + HH + ':' + mm;
 }
 
 console.log(formatDate(new Date('6/15/2018 09:15:00')));
