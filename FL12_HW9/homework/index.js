@@ -122,10 +122,16 @@ console.log(makeListFromRange([start, end]));
 /**
  * Task 7
  */
-function getArrayOfKeys(arr, keyName) {
-  return executeforEach(arr, function(el) {
-    return el[keyName];
+function getArrayOfKeys(dataset, keyName) {
+  const arr = [];
+
+  executeforEach(dataset, function(obj) {
+    if (obj[keyName] !== undefined) {
+      arr.push(obj[keyName]);
+    }
   });
+
+  return arr;
 }
 
 const actors = [
