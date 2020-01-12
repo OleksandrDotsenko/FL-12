@@ -5,10 +5,10 @@ function convert() {
   const result = [];
   for (let i = 0; i < arguments.length; i++) {
     if (typeof arguments[i] === 'string') {
-      result.push(arguments[i] * 1);
+      result.push(Number(arguments[i]));
     }
     if (typeof arguments[i] === 'number') {
-      result.push(arguments[i] + '');
+      result.push(String(arguments[i]));
     }
   }
   return result;
@@ -18,14 +18,16 @@ const a = '1';
 const b = 2;
 const c = 3;
 const d = '4';
-console.log(convert(a, b, c, d));
+convert(a, b, c, d);
 
 /**
  * Task 2
  */
 function executeforEach(arr, callback) {
-  for (let i = 0; i < arr.length; i++) {
-    callback(arr[i], i, arr);
+  if (typeof arr === 'object' && typeof callback === 'function') {
+    for (let i = 0; i < arr.length; i++) {
+      callback(arr[i], i, arr);
+    }
   }
 }
 
@@ -52,11 +54,9 @@ const h = 2;
 const i = '5';
 const j = 8;
 const term = 3;
-console.log(
-  mapArray([h, i, j], function(el) {
-    return +el + term;
-  })
-);
+mapArray([h, i, j], function(el) {
+  return Number(el) + term;
+});
 
 /**
  * Task 4
@@ -77,11 +77,9 @@ const k = 2;
 const l = 5;
 const m = 8;
 const divider = 2;
-console.log(
-  filterArray([k, l, m], function(el) {
-    return el % divider === 0;
-  })
-);
+filterArray([k, l, m], function(el) {
+  return el % divider === 0;
+});
 
 /**
  * Task 5
@@ -94,7 +92,7 @@ function flipOver(str) {
   return result;
 }
 
-console.log(flipOver('hey world'));
+flipOver('hey world');
 
 /**
  * Task 6
@@ -102,14 +100,8 @@ console.log(flipOver('hey world'));
 function makeListFromRange(range) {
   let result = [];
 
-  if (range && range[0] && range[1]) {
-    for (let i = range[0]; i <= range[1]; i++) {
-      result.push(i);
-    }
-  }
-
-  if (range && range.length === 1) {
-    for (let i = 0; i <= range[0]; i++) {
+  if (range && !isNaN(range[0]) && !isNaN(range[1])) {
+    for (let i = Number(range[0]); i <= range[1]; i++) {
       result.push(i);
     }
   }
@@ -119,7 +111,7 @@ function makeListFromRange(range) {
 
 const start = 2;
 const end = 7;
-console.log(makeListFromRange([start, end]));
+makeListFromRange([start, end]);
 
 /**
  * Task 7
@@ -128,7 +120,7 @@ function getArrayOfKeys(dataset, keyName) {
   const arr = [];
 
   executeforEach(dataset, function(obj) {
-    if (obj[keyName] !== undefined) {
+    if (obj[keyName]) {
       arr.push(obj[keyName]);
     }
   });
@@ -140,7 +132,7 @@ const actors = [
   { name: 'tommy', age: 36 },
   { name: 'lee', age: 28 }
 ];
-console.log(getArrayOfKeys(actors, 'name'));
+getArrayOfKeys(actors, 'name');
 
 /**
  * Task 8
@@ -150,7 +142,9 @@ function substitute(arr) {
   const resultArr = [];
 
   mapArray(arr, function(el) {
-    resultArr.push(el < limit ? '*' : el);
+    if (typeof el === 'number') {
+      resultArr.push(el < limit ? '*' : el);
+    }
   });
 
   return resultArr;
@@ -162,7 +156,7 @@ const p = 48;
 const q = 2;
 const r = 31;
 const s = 29;
-console.log(substitute([n, o, p, q, r, s]));
+substitute([n, o, p, q, r, s]);
 
 /**
  * Task 9
@@ -182,9 +176,9 @@ const date = new Date(dateYear, dateMonth, dateDay);
 const dayA = 1;
 const dayB = 2;
 const dayC = 365;
-console.log(getPastDay(date, dayA));
-console.log(getPastDay(date, dayB));
-console.log(getPastDay(date, dayC));
+getPastDay(date, dayA);
+getPastDay(date, dayB);
+getPastDay(date, dayC);
 
 /**
  * Task 10
@@ -207,5 +201,5 @@ function formatDate(date) {
   return YYYY + '/' + M + '/' + d + ' ' + HH + ':' + mm;
 }
 
-console.log(formatDate(new Date('6/15/2018 09:15:00')));
-console.log(formatDate(new Date()));
+formatDate(new Date('6/15/2018 09:15:00'));
+formatDate(new Date());
