@@ -86,8 +86,10 @@ filterArray([k, l, m], function(el) {
  */
 function flipOver(str) {
   let result = '';
-  for (let i = str.length - 1; i >= 0; i--) {
-    result += str[i];
+  if (typeof str === 'string') {
+    for (let i = str.length - 1; i >= 0; i--) {
+      result += str[i];
+    }
   }
   return result;
 }
