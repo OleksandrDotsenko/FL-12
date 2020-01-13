@@ -55,8 +55,8 @@ function flipOver(str) {
 function makeListFromRange(range) {
   let result = [];
 
-  if (range && range[0] > 0 && range[1] > 0) {
-    for (let i = range[0]; i <= range[1]; i++) {
+  if (range) {
+    for (let i = parseInt(range[0]); i <= parseInt(range[1]); i++) {
       result.push(i);
     }
   }
