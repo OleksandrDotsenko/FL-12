@@ -22,7 +22,7 @@ function executeforEach(arr, callback) {
 // Task 3
 function mapArray(arr, action) {
   executeforEach(arr, function(el, index, arr) {
-    arr[index] = action(el);
+    arr[index] = action(+el);
   });
 
   return arr;
