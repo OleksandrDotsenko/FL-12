@@ -1,15 +1,15 @@
 // Task 1
 function convert() {
-  const result = [];
+  const resultArr = [];
   for (let i = 0; i < arguments.length; i++) {
     if (typeof arguments[i] === 'string') {
-      result.push(Number(arguments[i]));
+      resultArr.push(Number(arguments[i]));
     }
     if (typeof arguments[i] === 'number') {
-      result.push(String(arguments[i]));
+      resultArr.push(String(arguments[i]));
     }
   }
-  return result;
+  return resultArr;
 }
 
 // Task 2
@@ -41,38 +41,38 @@ function filterArray(arr, action) {
 
 // Task 5
 function flipOver(str) {
-  let result = '';
+  let resultStr = '';
   str = str ? String(str) : '';
 
   for (let i = 0; i < str.length; i++) {
-    result = str[i] + result;
+    resultStr = str[i] + resultStr;
   }
 
-  return result;
+  return resultStr;
 }
 
 // Task 6
 function makeListFromRange(range) {
-  let result = [];
+  let resultArr = [];
 
   if (range) {
     for (let i = parseInt(range[0]); i <= parseInt(range[1]); i++) {
-      result.push(i);
+      resultArr.push(i);
     }
   }
 
-  return result;
+  return resultArr;
 }
 
 // Task 7
 function getArrayOfKeys(dataset, keyName) {
-  const arr = [];
+  const resultArr = [];
 
   executeforEach(dataset, function(obj) {
-    return obj[keyName] ? arr.push(obj[keyName]) : undefined;
+    return obj[keyName] ? resultArr.push(obj[keyName]) : undefined;
   });
 
-  return arr;
+  return resultArr;
 }
 
 // Task 8
