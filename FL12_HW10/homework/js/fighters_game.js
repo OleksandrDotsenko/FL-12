@@ -31,6 +31,7 @@ function Fighter({ name, damage, hp, strength, agility }) {
     attack: (enemy) => {
       if (hit(enemy)) {
         console.log(`${name} makes ${damage} to ${enemy.getName()}`);
+        // console.log(`${name} makes ${damage} to ${enemy.getName()}`, `[${name} ${hp} : ${enemy.getName()} ${enemy.getHealth()}]`);
       } else {
         console.log(`${name} attack missed`);
       }
@@ -45,33 +46,38 @@ function Fighter({ name, damage, hp, strength, agility }) {
   };
 }
 
-function battle(fighter1, fighter2) {
-  const hp1 = fighter1.getHealth;
-  const hp2 = fighter2.getHealth;
+function battle(attacker, defender) {
+  if (!attacker.getHealth()) {
+    return console.log(attacker.getName(), 'is dead.');
+  }
 
-  if (!hp1()) {
-    console.log(`${fighter1.getName()} is dead.`);
-  } else if (!hp2()) {
-    console.log(`${fighter2.getName()} is dead.`);
-  } else {
-    while (hp1() && hp2()) {
-      fighter1.attack(fighter2);
+  if (!defender.getHealth()) {
+    return console.log(defender.getName(), 'is dead.');
+  }
 
-      if (hp2()) {
-        fighter2.attack(fighter1);
-      }
-    }
+  let firstFighterAttacks = true;
+  let everyoneIsAlive = true;
 
-    if (hp1()) {
-      console.log(`${fighter1.getName()} has won!`);
+  while (everyoneIsAlive) {
+    if (firstFighterAttacks) {
+      attacker.attack(defender);
     } else {
-      console.log(`${fighter2.getName()} has won!`);
+      defender.attack(attacker);
     }
+    firstFighterAttacks = !firstFighterAttacks;
+    everyoneIsAlive = attacker.getHealth() && defender.getHealth();
+  }
+
+  if (attacker.getHealth()) {
+    return console.log(attacker.getName(), 'has won!');
+  }
+
+  if (defender.getHealth()) {
+    return console.log(defender.getName(), 'has won!');
   }
 }
 
 const myFighter1 = new Fighter({ name: 'Maximus', damage: 25, hp: 100, strength: 30, agility: 25 });
 const myFighter2 = new Fighter({ name: 'Drakonus', damage: 30, hp: 100, strength: 40, agility: 25 });
 
-// test
 battle(myFighter1, myFighter2);
