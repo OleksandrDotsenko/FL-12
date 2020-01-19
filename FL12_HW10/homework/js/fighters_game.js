@@ -4,18 +4,15 @@ function Fighter({ name, damage, hp, strength, agility }) {
   let wins = 0;
   let losses = 0;
 
-  const attackPower = () => Math.floor(Math.random() * MAX_POWER) + 1;
+  const generateAttack = () => Math.floor(Math.random() * MAX_POWER) + 1;
 
-  const hit = (enemy) => {
+  const checkAttack = (enemy) => {
     const defense = enemy.getStrength() + enemy.getAgility();
-
-    if (defense < MAX_POWER && attackPower() > defense) {
+    const isAttack = defense < MAX_POWER && generateAttack() > defense;
+    if (isAttack) {
       enemy.dealDamage(damage);
-
-      return true;
-    } else {
-      return false;
     }
+    return isAttack;
   };
 
   return {
@@ -29,7 +26,7 @@ function Fighter({ name, damage, hp, strength, agility }) {
     addWin: () => ++wins,
     addLoss: () => ++losses,
     attack: (enemy) => {
-      if (hit(enemy)) {
+      if (checkAttack(enemy)) {
         console.log(`${name} makes ${damage} to ${enemy.getName()}`);
         // console.log(`${name} makes ${damage} to ${enemy.getName()}`, `[${name} ${hp} : ${enemy.getName()} ${enemy.getHealth()}]`);
       } else {
@@ -37,11 +34,7 @@ function Fighter({ name, damage, hp, strength, agility }) {
       }
     },
     dealDamage: (damage) => {
-      if (hp <= damage) {
-        hp = 0;
-      } else {
-        hp -= damage;
-      }
+      hp = damage >= hp ? 0 : hp - damage;
     }
   };
 }
