@@ -62,10 +62,14 @@ function battle(attacker, defender) {
   }
 
   if (attacker.getHealth()) {
+    attacker.addWin();
+    defender.addLoss();
     return console.log(attacker.getName(), 'has won!');
   }
 
   if (defender.getHealth()) {
+    defender.addWin();
+    attacker.addLoss();
     return console.log(defender.getName(), 'has won!');
   }
 }
@@ -74,3 +78,6 @@ const myFighter1 = new Fighter({ name: 'Maximus', damage: 25, hp: 100, strength:
 const myFighter2 = new Fighter({ name: 'Drakonus', damage: 30, hp: 100, strength: 40, agility: 25 });
 
 battle(myFighter1, myFighter2);
+// console.log('\n');
+// myFighter1.logCombatHistory();
+// myFighter2.logCombatHistory();
