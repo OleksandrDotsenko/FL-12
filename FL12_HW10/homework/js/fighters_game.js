@@ -50,11 +50,11 @@ function Fighter({ name, damage, hp, strength, agility }) {
 
 function battle(attacker, defender) {
   if (!attacker.getHealth()) {
-    return console.log(attacker.getName(), 'is dead.');
+    return console.log(attacker.getName(), "is dead and can't fight.");
   }
 
   if (!defender.getHealth()) {
-    return console.log(defender.getName(), 'is dead.');
+    return console.log(defender.getName(), "is dead and can't fight.");
   }
 
   let firstFighterAttacks = true;
