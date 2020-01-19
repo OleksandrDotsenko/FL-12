@@ -1,20 +1,22 @@
 function Fighter({ name, damage, hp, strength, agility }) {
-  const MAX_POWER = 100;
   const TOTAL_HP = 100;
 
   let wins = 0;
   let losses = 0;
 
-  const _generateAttack = () => Math.floor(Math.random() * MAX_POWER) + 1;
+  const rnd = (max) => Math.floor(Math.random() * max) + 1;
 
   const attack = (enemy) => {
-    const defense = enemy.getStrength() + enemy.getAgility();
-    const isAttack = defense < MAX_POWER && _generateAttack() > defense;
+    const maxProbability = 100;
+    const enemyDefense = enemy.getStrength() + enemy.getAgility();
+    const attackChance = enemyDefense >= maxProbability ? 0 : maxProbability - enemyDefense;
+    const attackSuccess = attackChance && rnd(maxProbability) <= attackChance;
 
-    if (isAttack) {
-      enemy.dealDamage(damage);
-      console.log(`${name} makes ${damage} damage to ${enemy.getName()}`);
-      // console.log(`${name} makes ${damage} damage to ${enemy.getName()}`, `[${name} ${hp} : ${enemy.getName()} ${enemy.getHealth()}]`);
+    if (attackSuccess) {
+      const damageAmount = damage <= 0 ? 0 : damage;
+      enemy.dealDamage(damageAmount);
+      console.log(`${name} makes ${damageAmount} damage to ${enemy.getName()}`);
+      // console.log(`${name} makes ${damageAmount} damage to ${enemy.getName()}`, `[${name} ${hp} : ${enemy.getName()} ${enemy.getHealth()}]`);
     } else {
       console.log(`${name} attack missed`);
     }
@@ -84,6 +86,6 @@ function battle(attacker, defender) {
 }
 
 const myFighter1 = new Fighter({ name: 'Maximus', damage: 25, hp: 100, strength: 30, agility: 25 });
-const myFighter2 = new Fighter({ name: 'Drakonus', damage: 30, hp: 100, strength: 40, agility: 25 });
+const myFighter2 = new Fighter({ name: 'Drakonus', damage: 30, hp: 100, strength: 40, agility: 20 });
 
 battle(myFighter1, myFighter2);
