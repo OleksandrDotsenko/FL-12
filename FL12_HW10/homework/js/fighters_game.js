@@ -52,11 +52,11 @@ function battle(attacker, defender) {
 
   if (!attackerIsAlive || !defenderIsAlive) {
     if (!attackerIsAlive) {
-      console.log(attackerName, "is dead and can't fight.");
+      console.log(`${attackerName} is dead and can't fight.`);
     }
 
     if (!defenderIsAlive) {
-      console.log(defenderName, "is dead and can't fight.");
+      console.log(`${defenderName} is dead and can't fight.`);
     }
 
     return;
@@ -78,13 +78,13 @@ function battle(attacker, defender) {
   if (attackerIsAlive) {
     attacker.addWin();
     defender.addLoss();
-    console.log(attackerName, 'has won!');
+    console.log(`${attackerName} has won!`);
   }
 
   if (defenderIsAlive) {
     defender.addWin();
     attacker.addLoss();
-    console.log(defenderName, 'has won!');
+    console.log(`${defenderName} has won!`);
   }
 }
 
