@@ -44,37 +44,47 @@ function Fighter({ name, damage, hp, strength, agility }) {
 }
 
 function battle(attacker, defender) {
-  if (!attacker.getHealth()) {
-    return console.log(attacker.getName(), "is dead and can't fight.");
-  }
+  const attackerName = attacker.getName();
+  const defenderName = defender.getName();
 
-  if (!defender.getHealth()) {
-    return console.log(defender.getName(), "is dead and can't fight.");
+  let attackerIsAlive = attacker.getHealth() > 0;
+  let defenderIsAlive = defender.getHealth() > 0;
+
+  if (!attackerIsAlive || !defenderIsAlive) {
+    if (!attackerIsAlive) {
+      console.log(attackerName, "is dead and can't fight.");
+    }
+
+    if (!defenderIsAlive) {
+      console.log(defenderName, "is dead and can't fight.");
+    }
+
+    return;
   }
 
   let firstFighterAttacks = true;
-  let everyoneIsAlive = true;
 
-  while (everyoneIsAlive) {
+  while (attackerIsAlive && defenderIsAlive) {
     if (firstFighterAttacks) {
       attacker.attack(defender);
     } else {
       defender.attack(attacker);
     }
     firstFighterAttacks = !firstFighterAttacks;
-    everyoneIsAlive = attacker.getHealth() && defender.getHealth();
+    attackerIsAlive = attacker.getHealth() > 0;
+    defenderIsAlive = defender.getHealth() > 0;
   }
 
-  if (attacker.getHealth()) {
+  if (attackerIsAlive) {
     attacker.addWin();
     defender.addLoss();
-    return console.log(attacker.getName(), 'has won!');
+    console.log(attackerName, 'has won!');
   }
 
-  if (defender.getHealth()) {
+  if (defenderIsAlive) {
     defender.addWin();
     attacker.addLoss();
-    return console.log(defender.getName(), 'has won!');
+    console.log(defenderName, 'has won!');
   }
 }
 
