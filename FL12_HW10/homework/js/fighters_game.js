@@ -30,7 +30,6 @@ function Fighter({ name, damage, hp, strength, agility }) {
         const damageAmount = damage < 1 ? 1 : damage;
         enemy.dealDamage(damageAmount);
         message = `${name} makes ${damageAmount} damage to ${enemy.getName()}`;
-        // message = `${name} makes ${damageAmount} damage to ${enemy.getName()}, [${name} ${hp} : ${enemy.getName()} ${enemy.getHealth()}]`;
       } else {
         message = `${name} attack missed`;
       }
@@ -87,8 +86,3 @@ function battle(attacker, defender) {
     console.log(`${defenderName} has won!`);
   }
 }
-
-// const myFighter1 = new Fighter({ name: 'Maximus', damage: 25, hp: 100, strength: 30, agility: 25 });
-// const myFighter2 = new Fighter({ name: 'Drakonus', damage: 30, hp: 100, strength: 40, agility: 20 });
-
-// battle(myFighter1, myFighter2);
