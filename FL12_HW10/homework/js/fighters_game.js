@@ -1,52 +1,59 @@
 function Fighter({ name, damage, hp, strength, agility }) {
-  const TOTAL_HP = 100;
+  const totalHealth = hp;
 
   let wins = 0;
   let losses = 0;
 
   const rnd = (max) => Math.floor(Math.random() * max) + 1;
 
-  const attack = (enemy) => {
-    const maxProbability = 100;
-    const enemyDefense = enemy.getStrength() + enemy.getAgility();
-    const attackChance = enemyDefense >= maxProbability ? 0 : maxProbability - enemyDefense;
-    const attackSuccess = attackChance && rnd(maxProbability) <= attackChance;
-
-    if (attackSuccess) {
-      const damageAmount = damage <= 0 ? 0 : damage;
-      enemy.dealDamage(damageAmount);
-      console.log(`${name} makes ${damageAmount} damage to ${enemy.getName()}`);
-      // console.log(`${name} makes ${damageAmount} damage to ${enemy.getName()}`, `[${name} ${hp} : ${enemy.getName()} ${enemy.getHealth()}]`);
-    } else {
-      console.log(`${name} attack missed`);
-    }
-  };
-
-  const dealDamage = (damage) => {
-    hp = damage >= hp ? 0 : hp - damage;
-  };
-
-  const heal = (amount) => {
-    const sum = hp + amount;
-    hp = sum > TOTAL_HP ? TOTAL_HP : sum;
-  };
-
-  const logCombatHistory = () => {
-    console.log(`Name: ${name}, Wins: ${wins}, Losses: ${losses}`);
-  };
-
   return {
-    getName: () => name,
-    getDamage: () => damage,
-    getStrength: () => strength,
-    getAgility: () => agility,
-    getHealth: () => hp,
-    addWin: () => ++wins,
-    addLoss: () => ++losses,
-    logCombatHistory,
-    dealDamage,
-    attack,
-    heal
+    getName: () => {
+      return name;
+    },
+    getDamage: () => {
+      return damage;
+    },
+    getStrength: () => {
+      return strength;
+    },
+    getAgility: () => {
+      return agility;
+    },
+    getHealth: () => {
+      return hp;
+    },
+    addWin: () => {
+      ++wins;
+    },
+    addLoss: () => {
+      ++losses;
+    },
+    logCombatHistory: () => {
+      console.log(`Name: ${name}, Wins: ${wins}, Losses: ${losses}`);
+    },
+    dealDamage: (damage) => {
+      hp = damage >= hp ? 0 : hp - damage;
+    },
+    attack: (enemy) => {
+      const maxProbability = 100;
+      const attackChance = maxProbability - (enemy.getStrength() + enemy.getAgility());
+      const attackSuccess = attackChance > 0 && rnd(maxProbability) <= attackChance;
+      let message = '';
+
+      if (attackSuccess) {
+        const damageAmount = damage < 1 ? 1 : damage;
+        enemy.dealDamage(damageAmount);
+        message = `${name} makes ${damageAmount} damage to ${enemy.getName()}`;
+        // message = `${name} makes ${damageAmount} damage to ${enemy.getName()}, [${name} ${hp} : ${enemy.getName()} ${enemy.getHealth()}]`;
+      } else {
+        message = `${name} attack missed`;
+      }
+      console.log(message);
+    },
+    heal: (amount) => {
+      amount += hp;
+      hp = amount > totalHealth ? totalHealth : amount;
+    }
   };
 }
 
