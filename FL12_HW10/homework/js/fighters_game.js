@@ -7,27 +7,13 @@ function Fighter({ name, damage, hp, strength, agility }) {
   const rnd = (max) => Math.floor(Math.random() * max) + 1;
 
   return {
-    getName: () => {
-      return name;
-    },
-    getDamage: () => {
-      return damage;
-    },
-    getStrength: () => {
-      return strength;
-    },
-    getAgility: () => {
-      return agility;
-    },
-    getHealth: () => {
-      return hp;
-    },
-    addWin: () => {
-      ++wins;
-    },
-    addLoss: () => {
-      ++losses;
-    },
+    getName: () => name,
+    getHealth: () => hp,
+    getDamage: () => damage,
+    getAgility: () => agility,
+    getStrength: () => strength,
+    addWin: () => ++wins,
+    addLoss: () => ++losses,
     logCombatHistory: () => {
       console.log(`Name: ${name}, Wins: ${wins}, Losses: ${losses}`);
     },
