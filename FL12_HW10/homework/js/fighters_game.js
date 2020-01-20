@@ -22,8 +22,8 @@ function Fighter({ name, damage, hp, strength, agility }) {
     },
     attack: (enemy) => {
       const maxProbability = 100;
-      const attackChance = maxProbability - (enemy.getStrength() + enemy.getAgility()) || maxProbability;
-      const attackSuccess = attackChance > 0 && rnd(maxProbability) <= attackChance;
+      const attackChance = maxProbability - (enemy.getStrength() + enemy.getAgility());
+      const attackSuccess = isNaN(attackChance) ? true : attackChance > 0 && rnd(maxProbability) <= attackChance;
       let message = '';
 
       if (attackSuccess) {
@@ -88,7 +88,7 @@ function battle(attacker, defender) {
   }
 }
 
-const myFighter1 = new Fighter({ name: 'Maximus', damage: 25, hp: 100, strength: 30, agility: 25 });
-const myFighter2 = new Fighter({ name: 'Drakonus', damage: 30, hp: 100, strength: 40, agility: 20 });
+// const myFighter1 = new Fighter({ name: 'Maximus', damage: 25, hp: 100, strength: 30, agility: 25 });
+// const myFighter2 = new Fighter({ name: 'Drakonus', damage: 30, hp: 100, strength: 40, agility: 20 });
 
-battle(myFighter1, myFighter2);
+// battle(myFighter1, myFighter2);
