@@ -22,7 +22,7 @@ function Fighter({ name, damage, hp, strength, agility }) {
     },
     attack: (enemy) => {
       const maxProbability = 100;
-      const attackChance = maxProbability - (enemy.getStrength() + enemy.getAgility());
+      const attackChance = maxProbability - (enemy.getStrength() + enemy.getAgility()) || maxProbability;
       const attackSuccess = attackChance > 0 && rnd(maxProbability) <= attackChance;
       let message = '';
 
