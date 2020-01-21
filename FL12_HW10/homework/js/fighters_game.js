@@ -18,7 +18,8 @@ function Fighter({ name, damage, hp, strength, agility }) {
       console.log(`Name: ${name}, Wins: ${wins}, Losses: ${losses}`);
     },
     dealDamage: (damage) => {
-      hp = damage >= hp ? 0 : hp - damage;
+      damage = Math.abs(damage);
+      hp = !damage || damage >= hp ? 0 : hp - damage;
     },
     attack: (enemy) => {
       const maxProbability = 100;
@@ -27,9 +28,8 @@ function Fighter({ name, damage, hp, strength, agility }) {
       let message = '';
 
       if (attackSuccess) {
-        const damageAmount = damage < 1 ? 1 : damage;
-        enemy.dealDamage(damageAmount);
-        message = `${name} makes ${damageAmount} damage to ${enemy.getName()}`;
+        enemy.dealDamage(damage);
+        message = `${name} makes ${damage} damage to ${enemy.getName()}`;
       } else {
         message = `${name} attack missed`;
       }
