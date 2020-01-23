@@ -37,15 +37,24 @@ const structure = [
 
 const rootNode = document.getElementById('root');
 
+const options = {
+  titleTag: 'div',
+  titleClass: 'el-title',
+  openClass: 'open',
+  closeClass: 'close'
+};
+
 function createElementsTreeByStructure(structure) {
   const rootElement = document.createElement('ul');
 
   for (const elem of structure) {
     if (elem.title) {
       const branchElement = document.createElement('li');
-
-      const branchTitle = document.createElement('span');
+      const branchTitle = document.createElement(options.titleTag);
       const branchTitleText = document.createTextNode(elem.title);
+      branchElement.setAttribute('class', options.closeClass);
+      branchTitle.setAttribute('class', options.titleClass);
+
       branchTitle.appendChild(branchTitleText);
       branchElement.appendChild(branchTitle);
 
@@ -61,5 +70,21 @@ function createElementsTreeByStructure(structure) {
   return rootElement;
 }
 
+function onFileTreeClick(event) {
+  const element = event.target.parentElement;
+  let className = element.getAttribute('class');
+  if (className) {
+    if (className.indexOf(options.openClass) >= 0) {
+      const newClass = className.replace(options.openClass, options.closeClass);
+      element.setAttribute('class', newClass);
+    }
+    if (className.indexOf(options.closeClass) >= 0) {
+      const newClass = className.replace(options.closeClass, options.openClass);
+      element.setAttribute('class', newClass);
+    }
+  }
+}
+
 const fileTree = createElementsTreeByStructure(structure);
+fileTree.addEventListener('click', onFileTreeClick);
 rootNode.appendChild(fileTree);

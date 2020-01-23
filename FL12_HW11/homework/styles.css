@@ -1,1 +1,7 @@
-/* Todo: your styles go here*/
+.el-title {
+  cursor: pointer;
+}
+
+.close > ul {
+  display: none;
+}
