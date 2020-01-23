@@ -2,6 +2,23 @@
   cursor: pointer;
 }
 
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+ul ul {
+  padding-left: 1rem;
+}
+
 .close > ul {
   display: none;
+}
+
+.folder {
+  color: #edbc0b;
+  cursor: pointer;
+}
+
+.file {
+  color: lightgrey;
 }
