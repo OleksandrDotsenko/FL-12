@@ -38,47 +38,46 @@ const structure = [
 const rootNode = document.getElementById('root');
 
 const options = {
-  rootTag: 'ul',
-  branchTag: 'li',
-  titleTag: 'span',
-  iconTag: 'i',
-  titleClass: 'el-title',
-  openClass: 'open',
-  closeClass: 'close',
-  classFolder: 'folder',
-  classFile: 'file',
   iconSet: 'material-icons',
-  iconFolderOpen: 'folder_open',
-  iconFolderClose: 'folder',
-  iconFile: 'insert_drive_file'
+  icons: {
+    open: 'folder_open',
+    close: 'folder'
+  }
 };
 
+function createElementWithClass(type, className) {
+  const newElement = document.createElement(type);
+  newElement.setAttribute('class', className);
+  return newElement;
+}
+
 function createElementsTreeByStructure(structure) {
-  const rootElement = document.createElement(options.rootTag);
+  const rootElement = document.createElement('ul');
 
   for (const elem of structure) {
     if (elem.title) {
-      const branchElement = document.createElement(options.branchTag);
-      const branchIcon = document.createElement(options.iconTag);
-      const branchTitle = document.createElement(options.titleTag);
+      const elementType = elem.folder ? 'folder' : 'insert_drive_file';
+      const branchElement = createElementWithClass('li', 'close');
+      const branchTitle = createElementWithClass('div', 'tree-title clickable');
+      const branchIcon = createElementWithClass('i', `${options.iconSet} ${elementType} clickable`);
+      branchIcon.appendChild(document.createTextNode(elementType));
+      branchTitle.appendChild(branchIcon);
 
-      const branchTitleText = document.createTextNode(elem.title);
-      const branchIconText = document.createTextNode(elem.folder ? options.iconFolderClose : options.iconFile);
+      const branchText = createElementWithClass('span', 'clickable');
+      branchText.appendChild(document.createTextNode(elem.title));
+      branchTitle.appendChild(branchText);
 
-      const elementType = elem.folder ? options.classFolder : options.classFile;
-
-      branchElement.setAttribute('class', options.closeClass);
-      branchTitle.setAttribute('class', options.titleClass);
-      branchIcon.setAttribute('class', `${options.iconSet} ${elementType}`);
-
-      branchIcon.appendChild(branchIconText);
-      branchTitle.appendChild(branchTitleText);
-      branchElement.appendChild(branchIcon);
       branchElement.appendChild(branchTitle);
 
-      if (elem.folder && elem.children) {
-        const children = createElementsTreeByStructure(elem.children);
-        branchElement.appendChild(children);
+      if (elem.folder) {
+        if (elem.children) {
+          const children = createElementsTreeByStructure(elem.children);
+          branchElement.appendChild(children);
+        } else {
+          const placeholder = createElementWithClass('div', 'placeholder');
+          placeholder.appendChild(document.createTextNode('Folder is empty'));
+          branchElement.appendChild(placeholder);
+        }
       }
 
       rootElement.appendChild(branchElement);
@@ -88,36 +87,47 @@ function createElementsTreeByStructure(structure) {
   return rootElement;
 }
 
-function onFileTreeClick(event) {
-  const element = event.target.parentElement;
-  const className = element.getAttribute('class');
-
-  if (className) {
-    if (className.indexOf(options.openClass) >= 0) {
-      const newClass = className.replace(options.openClass, options.closeClass);
-      element.setAttribute('class', newClass);
-      const icon = element.firstElementChild;
-      if (icon) {
-        const iconClass = icon.getAttribute('class');
-        if (iconClass && iconClass.indexOf(options.classFolder) >= 0) {
-          icon.textContent = options.iconFolderClose;
-        }
-      }
-    }
-    if (className.indexOf(options.closeClass) >= 0) {
-      const newClass = className.replace(options.closeClass, options.openClass);
-      element.setAttribute('class', newClass);
-      const icon = element.firstElementChild;
-      if (icon) {
-        const iconClass = icon.getAttribute('class');
-        if (iconClass && iconClass.indexOf(options.classFolder) >= 0) {
-          icon.textContent = options.iconFolderOpen;
-        }
-      }
-    }
+function changeDisplay(element, className, classA, classB) {
+  element.setAttribute('class', className.replace(classA, classB));
+  const icon = element.firstElementChild.firstElementChild;
+  if (icon.getAttribute('class').indexOf('folder') >= 0) {
+    icon.textContent = options.icons[classB];
   }
 }
 
-const fileTree = createElementsTreeByStructure(structure);
-fileTree.addEventListener('click', onFileTreeClick);
-rootNode.appendChild(fileTree);
+function findRootElement(currentElement, rootElement = 'LI') {
+  if (currentElement.nodeName === rootElement) {
+    return currentElement;
+  } else {
+    return findRootElement(currentElement.parentElement, rootElement);
+  }
+}
+
+function onTreeClick(event) {
+  const currentElement = event.target;
+  const currentClass = currentElement.getAttribute('class');
+
+  if (!currentClass || currentClass.indexOf('clickable') < 0) {
+    return;
+  }
+
+  const element = findRootElement(currentElement);
+  const className = element.getAttribute('class');
+
+  if (className.indexOf('open') >= 0) {
+    changeDisplay(element, className, 'open', 'close');
+  }
+  if (className.indexOf('close') >= 0) {
+    changeDisplay(element, className, 'close', 'open');
+  }
+}
+
+function createTreeMenu() {
+  const tree = createElementsTreeByStructure(structure);
+  tree.addEventListener('click', onTreeClick);
+  const treeRoot = createElementWithClass('div', 'tree');
+  treeRoot.appendChild(tree);
+  return treeRoot;
+}
+
+rootNode.appendChild(createTreeMenu());
