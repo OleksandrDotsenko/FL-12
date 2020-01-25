@@ -10,7 +10,7 @@ body {
   padding: 0.3rem 0 0 1rem;
 }
 .tree ul li {
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
 }
 .tree .close > ul,
 .tree .close > .placeholder {
@@ -20,9 +20,10 @@ body {
   cursor: pointer;
   font-size: 1.1rem;
   line-height: 1;
+  padding: 0.1rem;
 }
 .tree .tree-title:hover {
-  background-color: lightgrey;
+  background-color: #efefef;
 }
 .tree .folder {
   color: #edbc0b;
@@ -40,4 +41,5 @@ body {
 .tree .placeholder {
   font-size: 1.1rem;
   font-style: italic;
+  padding-left: 0.5rem;
 }

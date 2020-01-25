@@ -40,8 +40,8 @@ const rootNode = document.getElementById('root');
 const options = {
   iconSet: 'material-icons',
   icons: {
-    open: 'folder_open',
-    close: 'folder'
+    folder: 'folder',
+    file: 'insert_drive_file'
   }
 };
 
@@ -56,7 +56,7 @@ function createElementsTreeByStructure(structure) {
 
   for (const elem of structure) {
     if (elem.title) {
-      const elementType = elem.folder ? 'folder' : 'insert_drive_file';
+      const elementType = elem.folder ? options.icons.folder : options.icons.file;
       const branchElement = createElementWithClass('li', 'close');
       const branchTitle = createElementWithClass('div', 'tree-title clickable');
       const branchIcon = createElementWithClass('i', `${options.iconSet} ${elementType} clickable`);
@@ -87,19 +87,22 @@ function createElementsTreeByStructure(structure) {
   return rootElement;
 }
 
-function changeDisplay(element, className, classA, classB) {
-  element.setAttribute('class', className.replace(classA, classB));
-  const icon = element.firstElementChild.firstElementChild;
-  if (icon.getAttribute('class').indexOf('folder') >= 0) {
-    icon.textContent = options.icons[classB];
+function switchTitleElementClass(element, classA, classB, iconText) {
+  const className = element.getAttribute('class');
+  if (className) {
+    element.setAttribute('class', className.replace(classA, classB));
+    const icon = element.firstElementChild.firstElementChild;
+    if (icon.getAttribute('class').indexOf('folder') >= 0) {
+      icon.textContent = iconText;
+    }
   }
 }
 
-function findRootElement(currentElement, rootElement = 'LI') {
+function findParentElement(currentElement, rootElement = 'LI') {
   if (currentElement.nodeName === rootElement) {
     return currentElement;
   } else {
-    return findRootElement(currentElement.parentElement, rootElement);
+    return findParentElement(currentElement.parentElement, rootElement);
   }
 }
 
@@ -111,14 +114,14 @@ function onTreeClick(event) {
     return;
   }
 
-  const element = findRootElement(currentElement);
-  const className = element.getAttribute('class');
-
-  if (className.indexOf('open') >= 0) {
-    changeDisplay(element, className, 'open', 'close');
+  const element = findParentElement(currentElement);
+  if (element.getAttribute('class').indexOf('open') >= 0) {
+    switchTitleElementClass(element, 'open', 'close', 'folder');
+    return;
   }
-  if (className.indexOf('close') >= 0) {
-    changeDisplay(element, className, 'close', 'open');
+  if (element.getAttribute('class').indexOf('close') >= 0) {
+    switchTitleElementClass(element, 'close', 'open', 'folder_open');
+    return;
   }
 }
 
