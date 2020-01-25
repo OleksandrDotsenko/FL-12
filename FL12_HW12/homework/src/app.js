@@ -67,39 +67,79 @@ class Router {
 }
 
 // Pages
-class MainPage {
+class Page {
+  constructor(className, headerText) {
+    this.className = className;
+    this.headerText = headerText;
+  }
+
+  generate(content) {
+    const wrapperElement = document.createElement('div');
+    wrapperElement.setAttribute('class', this.className);
+
+    const headerElement = document.createElement('h1');
+    const headerElementText = document.createTextNode(this.headerText);
+    headerElement.appendChild(headerElementText);
+    wrapperElement.appendChild(headerElement);
+
+    const contentElement = document.createElement('div');
+    contentElement.setAttribute('class', 'content');
+    contentElement.appendChild(content);
+
+    wrapperElement.appendChild(contentElement);
+    return wrapperElement;
+  }
+}
+
+class MainPage extends Page {
+  constructor() {
+    super('MainPage', 'List of items');
+  }
+
   content() {
     const content = document.createElement('p');
     const blockText = document.createTextNode('Main Page');
     content.appendChild(blockText);
-    return content;
+    return this.generate(content);
   }
 }
 
-class AddPage {
+class AddPage extends Page {
+  constructor() {
+    super('AddPage', 'Add new item');
+  }
+
   content() {
     const content = document.createElement('p');
     const blockText = document.createTextNode('Add Page');
     content.appendChild(blockText);
-    return content;
+    return this.generate(content);
   }
 }
 
-class ModifyPage {
+class ModifyPage extends Page {
+  constructor() {
+    super('ModifyPage', 'Modify item');
+  }
+
   content() {
     const content = document.createElement('p');
     const blockText = document.createTextNode('Modify Page');
     content.appendChild(blockText);
-    return content;
+    return this.generate(content);
   }
 }
 
-class NotFoundPage {
+class NotFoundPage extends Page {
+  constructor() {
+    super('NotFoundPage', '404');
+  }
+
   content() {
     const content = document.createElement('p');
     const blockText = document.createTextNode('Not Found Page');
     content.appendChild(blockText);
-    return content;
+    return this.generate(content);
   }
 }
 
@@ -143,10 +183,11 @@ class App {
     const route = this.router.getRoute(event);
     if (route) {
       document.title = 'My App :: ' + route.title;
-      if (!route.page.content) {
-        route.page = new route.Page();
+      if (!route.Page.content) {
+        route.Page = new route.Page();
       }
-      this.content(route.page.content());
+
+      this.content(route.Page.content());
     }
   }
 
