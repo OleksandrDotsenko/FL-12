@@ -109,11 +109,50 @@ class AddPage extends Page {
     super('AddPage', 'Add new item');
   }
 
+  onFormSubmit(event) {
+    event.preventDefault();
+  }
+
+  onFormClick(event) {
+    console.log(event.target.name);
+  }
+
   content() {
-    const content = document.createElement('p');
-    const blockText = document.createTextNode('Add Page');
-    content.appendChild(blockText);
-    return this.generate(content);
+    const form = document.createElement('form');
+    form.setAttribute('name', 'addform');
+    form.addEventListener('submit', this.onFormSubmit);
+    form.addEventListener('click', this.onFormClick);
+
+    const inputName = document.createElement('input');
+    inputName.setAttribute('type', 'text');
+    inputName.setAttribute('name', 'item');
+    inputName.setAttribute('placeholder', 'name');
+    form.appendChild(inputName);
+
+    const buttonsBlock = document.createElement('p');
+    buttonsBlock.setAttribute('class', 'buttons');
+
+    const btnAdd = document.createElement('button');
+    btnAdd.setAttribute('type', 'button');
+    btnAdd.setAttribute('name', 'add');
+    btnAdd.appendChild(document.createTextNode('Add terms'));
+    buttonsBlock.appendChild(btnAdd);
+
+    const btnSave = document.createElement('button');
+    btnSave.setAttribute('type', 'button');
+    btnSave.setAttribute('name', 'save');
+    btnSave.appendChild(document.createTextNode('Save changes'));
+    buttonsBlock.appendChild(btnSave);
+
+    const btnCancel = document.createElement('button');
+    btnCancel.setAttribute('type', 'button');
+    btnCancel.setAttribute('name', 'cancel');
+    btnCancel.appendChild(document.createTextNode('Cancel'));
+    buttonsBlock.appendChild(btnCancel);
+
+    form.appendChild(buttonsBlock);
+
+    return this.generate(form);
   }
 }
 
