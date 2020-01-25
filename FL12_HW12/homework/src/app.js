@@ -66,50 +66,71 @@ class Router {
   }
 }
 
-// Driver
-class Driver {
-  constructor(options) {
-    console.log('[Driver constructor]');
-  }
-}
-
 // Pages
-class MainPage extends Driver {
-  constructor(options) {
-    super(options);
-
-    console.log('[MainPage constructor]');
+class MainPage {
+  content() {
+    const content = document.createElement('p');
+    const blockText = document.createTextNode('Main Page');
+    content.appendChild(blockText);
+    return content;
   }
 }
 
-class AddPage extends Driver {
-  constructor(options) {
-    super(options);
-
-    console.log('[AddPage constructor]');
+class AddPage {
+  content() {
+    const content = document.createElement('p');
+    const blockText = document.createTextNode('Add Page');
+    content.appendChild(blockText);
+    return content;
   }
 }
 
-class ModifyPage extends Driver {
-  constructor(options) {
-    super(options);
-
-    console.log('[ModifyPage constructor]');
+class ModifyPage {
+  content() {
+    const content = document.createElement('p');
+    const blockText = document.createTextNode('Modify Page');
+    content.appendChild(blockText);
+    return content;
   }
 }
 
-class NotFoundPage extends Driver {
-  constructor(options) {
-    super(options);
-
-    console.log('[NotFoundPage constructor]');
+class NotFoundPage {
+  content() {
+    const content = document.createElement('p');
+    const blockText = document.createTextNode('Not Found Page');
+    content.appendChild(blockText);
+    return content;
   }
 }
 
 // App
-class App extends Driver {
-  constructor(options) {
-    super(options);
+class App {
+  constructor(root) {
+    const routes = [
+      {
+        path: '',
+        Page: MainPage,
+        title: 'Main page'
+      },
+      {
+        path: '/add',
+        Page: AddPage,
+        title: 'Add'
+      },
+      {
+        path: '/modify/:id',
+        Page: ModifyPage,
+        title: 'Modify'
+      },
+      {
+        path: '/404',
+        Page: NotFoundPage,
+        title: 'Page not found'
+      }
+    ];
+
+    this.root = root;
+    this.router = new Router(routes);
 
     window.addEventListener('hashchange', this.handlerHashchange.bind(this));
   }
@@ -119,36 +140,23 @@ class App extends Driver {
   }
 
   handlerHashchange(event) {
-    const route = routerService.getRoute(event);
+    const route = this.router.getRoute(event);
     if (route) {
       document.title = 'My App :: ' + route.title;
-      console.log('[ROUTE]', route);
+      if (!route.page.content) {
+        route.page = new route.Page();
+      }
+      this.content(route.page.content());
+    }
+  }
+
+  content(newNode) {
+    if (!this.root.firstChild) {
+      this.root.appendChild(newNode);
+    } else {
+      this.root.replaceChild(newNode, this.root.firstChild);
     }
   }
 }
 
-// Routes
-const routerService = new Router([
-  {
-    path: '',
-    route: MainPage,
-    title: 'Main page'
-  },
-  {
-    path: '/add',
-    route: AddPage,
-    title: 'Add'
-  },
-  {
-    path: '/modify/:id',
-    route: ModifyPage,
-    title: 'Modify'
-  },
-  {
-    path: '/404',
-    route: NotFoundPage,
-    title: 'Page not found'
-  }
-]);
-
-new App({ container: document.getElementById('root') }).init();
+new App(document.getElementById('root')).init();
