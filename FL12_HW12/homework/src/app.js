@@ -31,7 +31,7 @@ class Router {
 
     if (route) {
       if (route.redirect) {
-        this.goTo(route.redirect);
+        this.redirect(route.redirect);
       }
       return route;
     } else {
@@ -140,10 +140,12 @@ class MainPage extends Page {
 }
 
 class AddPage extends Page {
-  constructor(rerender) {
+  constructor(options) {
     super('AddPage', 'Add new item');
 
-    this.rerender = rerender;
+    this.rerender = options.rerender;
+    this.storageAvailable = options.storageAvailable;
+    this.redirect = options.redirect;
     this.onFormClick = this.onFormClick.bind(this);
 
     this.data = {
@@ -151,6 +153,7 @@ class AddPage extends Page {
       counter: 0,
       terms: [],
       definitions: [],
+      studied: false,
       error: false,
       errorMessage: '* field is required'
     };
@@ -216,10 +219,42 @@ class AddPage extends Page {
     if (isSave) {
       if (!this.data.newsetname) {
         this.data.error = true;
+      } else if (this.storageAvailable) {
+        this.saveDataToStorage(this.formatSet());
+        this.redirect('/');
       }
     }
 
     this.rerender();
+  }
+
+  formatSet() {
+    const data = {};
+
+    data.name = this.data.newsetname;
+    data.studied = this.data.studied;
+    data.date = new Date().getTime();
+    data.collection = [];
+
+    for (let i = 0; i < this.data.terms.length; i++) {
+      data.collection.push({
+        term: this.data.terms[i],
+        definition: this.data.definitions[i]
+      });
+    }
+
+    return data;
+  }
+
+  saveDataToStorage(data) {
+    let appDB = localStorage.getItem('app-db');
+    if (!appDB) {
+      appDB = [data];
+    } else {
+      appDB = JSON.parse(appDB);
+      appDB.push(data);
+    }
+    localStorage.setItem('app-db', JSON.stringify(appDB));
   }
 
   content() {
@@ -305,6 +340,13 @@ class App {
     this.router = new Router(routes);
     this.currentPage = null;
 
+    if (this.storageAvailable('localStorage')) {
+      this.storageAvailable = true;
+    } else {
+      this.storageAvailable = false;
+      confirm('To use this application you must enable local storage support.');
+    }
+
     this.rerender = this.rerender.bind(this);
     window.addEventListener('hashchange', this.handlerHashchange.bind(this));
   }
@@ -318,10 +360,33 @@ class App {
     if (route) {
       document.title = 'My App :: ' + route.title;
       if (!route.Page.content) {
-        route.Page = new route.Page(this.rerender);
+        route.Page = new route.Page({
+          rerender: this.rerender,
+          storageAvailable: this.storageAvailable,
+          redirect: this.router.redirect
+        });
       }
       this.currentPage = route.Page;
       this.rerender();
+    }
+  }
+
+  storageAvailable(type) {
+    let storage;
+    try {
+      storage = window[type];
+      let x = '__storage_test__';
+      storage.setItem(x, x);
+      storage.removeItem(x);
+      return true;
+    } catch (e) {
+      const e22 = 22;
+      const e1014 = 1014;
+      const eZero = 0;
+      const exp = e instanceof DOMException;
+      const exc = e.name === 'QuotaExceededError';
+      const stor = e.name === 'NS_ERROR_DOM_QUOTA_REACHED' && storage && storage.length !== eZero;
+      return exp && (e.code === e22 || e.code === e1014 || exc || stor);
     }
   }
 
