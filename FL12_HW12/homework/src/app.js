@@ -71,13 +71,44 @@ class Page {
     this.headerText = headerText;
   }
 
-  generate(content) {
+  createBox(tagName, tagClass) {
+    const newTag = document.createElement(tagName);
+    newTag.setAttribute('class', tagClass);
+    return newTag;
+  }
+
+  createInput(type, name, value, placeholder) {
+    const inputName = document.createElement('input');
+    inputName.setAttribute('type', type);
+    inputName.setAttribute('name', name);
+    inputName.setAttribute('value', value);
+    inputName.setAttribute('placeholder', placeholder);
+    return inputName;
+  }
+
+  createButton(type, name, value) {
+    const btn = document.createElement('button');
+    btn.setAttribute('type', type);
+    btn.setAttribute('name', name);
+    btn.appendChild(document.createTextNode(value));
+    return btn;
+  }
+
+  createForm(idName, onSubmit, onClick) {
+    const newForm = document.createElement('form');
+    newForm.setAttribute('name', idName);
+    newForm.setAttribute('id', idName);
+    newForm.addEventListener('submit', onSubmit);
+    newForm.addEventListener('click', onClick);
+    return newForm;
+  }
+
+  wrapper(content) {
     const wrapperElement = document.createElement('div');
     wrapperElement.setAttribute('class', this.className);
 
     const headerElement = document.createElement('h1');
-    const headerElementText = document.createTextNode(this.headerText);
-    headerElement.appendChild(headerElementText);
+    headerElement.appendChild(document.createTextNode(this.headerText));
     wrapperElement.appendChild(headerElement);
 
     const contentElement = document.createElement('div');
@@ -113,6 +144,10 @@ class AddPage extends Page {
       terms: [],
       definitions: []
     };
+  }
+
+  getV(arr, key) {
+    return this.data[arr][key] ? this.data[arr][key] : '';
   }
 
   onFormSubmit(event) {
@@ -157,64 +192,23 @@ class AddPage extends Page {
   }
 
   content() {
-    const form = document.createElement('form');
-    form.setAttribute('name', 'addform');
-    form.setAttribute('id', 'addform');
-    form.addEventListener('submit', this.onFormSubmit);
-    form.addEventListener('click', this.onFormClick);
+    const form = this.createForm('addform', this.onFormSubmit, this.onFormClick);
+    form.appendChild(this.createInput('text', 'newsetname', this.data.newsetname, 'name'));
 
-    const inputName = document.createElement('input');
-    inputName.setAttribute('type', 'text');
-    inputName.setAttribute('name', 'newsetname');
-    inputName.setAttribute('value', this.data.newsetname ? this.data.newsetname : '');
-    inputName.setAttribute('placeholder', 'name');
-    form.appendChild(inputName);
-
-    const buttonsBlock = document.createElement('p');
-    buttonsBlock.setAttribute('class', 'buttons');
-
-    const btnAdd = document.createElement('button');
-    btnAdd.setAttribute('type', 'button');
-    btnAdd.setAttribute('name', 'add');
-    btnAdd.appendChild(document.createTextNode('Add terms'));
-    buttonsBlock.appendChild(btnAdd);
-
-    const btnSave = document.createElement('button');
-    btnSave.setAttribute('type', 'button');
-    btnSave.setAttribute('name', 'save');
-    btnSave.appendChild(document.createTextNode('Save changes'));
-    buttonsBlock.appendChild(btnSave);
-
-    const btnCancel = document.createElement('button');
-    btnCancel.setAttribute('type', 'button');
-    btnCancel.setAttribute('name', 'cancel');
-    btnCancel.appendChild(document.createTextNode('Cancel'));
-    buttonsBlock.appendChild(btnCancel);
-
+    const buttonsBlock = this.createBox('p', 'buttons');
+    buttonsBlock.appendChild(this.createButton('button', 'add', 'Add terms'));
+    buttonsBlock.appendChild(this.createButton('button', 'save', 'Save changes'));
+    buttonsBlock.appendChild(this.createButton('button', 'cancel', 'Cancel'));
     form.appendChild(buttonsBlock);
 
     for (let i = 0; i < this.data.counter; i++) {
-      const dl = document.createElement('div');
-      dl.setAttribute('class', 'card');
-
-      const dt = document.createElement('input');
-      dt.setAttribute('type', 'text');
-      dt.setAttribute('name', 'terms[]');
-      dt.setAttribute('value', this.data.terms[i] ? this.data.terms[i] : '');
-      dt.setAttribute('placeholder', 'Enter term');
-
-      const dd = document.createElement('input');
-      dd.setAttribute('type', 'text');
-      dd.setAttribute('name', 'definitions[]');
-      dd.setAttribute('value', this.data.definitions[i] ? this.data.definitions[i] : '');
-      dd.setAttribute('placeholder', 'Enter definition');
-
-      dl.appendChild(dt);
-      dl.appendChild(dd);
+      const dl = this.createBox('div', 'card');
+      dl.appendChild(this.createInput('text', 'terms[]', this.getV('terms', i), 'Enter term'));
+      dl.appendChild(this.createInput('text', 'definitions[]', this.getV('definitions', i), 'Enter definition'));
       form.appendChild(dl);
     }
 
-    return this.generate(form);
+    return this.wrapper(form);
   }
 }
 
@@ -227,7 +221,7 @@ class ModifyPage extends Page {
     const content = document.createElement('p');
     const blockText = document.createTextNode('Modify Page');
     content.appendChild(blockText);
-    return this.generate(content);
+    return this.wrapper(content);
   }
 }
 
@@ -240,7 +234,7 @@ class NotFoundPage extends Page {
     const content = document.createElement('p');
     const blockText = document.createTextNode('Not Found Page');
     content.appendChild(blockText);
-    return this.generate(content);
+    return this.wrapper(content);
   }
 }
 

@@ -1,2 +1,9 @@
-/* Your styles go here */
+body {
+  font-size: 16px;
+  font-family: 'Times New Roman', Times, serif;
+}
 
+h1 {
+  font-weight: normal;
+  color: teal;
+}
