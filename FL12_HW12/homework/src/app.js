@@ -129,7 +129,7 @@ class MainPage extends Page {
     const content = document.createElement('p');
     const blockText = document.createTextNode('Main Page');
     content.appendChild(blockText);
-    return this.generate(content);
+    return this.wrapper(content);
   }
 }
 
