@@ -71,9 +71,12 @@ class Page {
     this.headerText = headerText;
   }
 
-  createBox(tagName, tagClass) {
+  createBox(tagName, tagClass, text = '') {
     const newTag = document.createElement(tagName);
     newTag.setAttribute('class', tagClass);
+    if (text !== '') {
+      newTag.appendChild(document.createTextNode(text));
+    }
     return newTag;
   }
 
@@ -139,13 +142,17 @@ class MainPage extends Page {
 class AddPage extends Page {
   constructor(rerender) {
     super('AddPage', 'Add new item');
+
     this.rerender = rerender;
     this.onFormClick = this.onFormClick.bind(this);
+
     this.data = {
       newsetname: '',
       counter: 0,
       terms: [],
-      definitions: []
+      definitions: [],
+      error: false,
+      errorMessage: '* field is required'
     };
   }
 
@@ -206,12 +213,24 @@ class AddPage extends Page {
       this.data.counter = this.data.counter - 1;
     }
 
+    if (isSave) {
+      if (!this.data.newsetname) {
+        this.data.error = true;
+      }
+    }
+
     this.rerender();
   }
 
   content() {
     const form = this.createForm('addform', this.onFormSubmit, this.onFormClick);
-    form.appendChild(this.createInput('text', 'newsetname', this.data.newsetname, 'name'));
+
+    const newsetnameBlock = this.createBox('p', 'datain');
+    newsetnameBlock.appendChild(this.createInput('text', 'newsetname', this.data.newsetname, 'name'));
+    if (this.data.error) {
+      newsetnameBlock.appendChild(this.createBox('span', 'message', ' ' + this.data.errorMessage));
+    }
+    form.appendChild(newsetnameBlock);
 
     const buttonsBlock = this.createBox('p', 'buttons');
     buttonsBlock.appendChild(this.createButton('button', 'add', 'Add terms'));
