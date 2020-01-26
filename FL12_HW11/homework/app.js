@@ -82,7 +82,7 @@ function treeMenu(structure, options) {
         branchElement.appendChild(branchTitle);
 
         if (elem.folder) {
-          if (elem.children) {
+          if (elem.children && elem.children.length > 0) {
             const children = createElementsTreeByStructure(elem.children);
             branchElement.appendChild(children);
           } else {
