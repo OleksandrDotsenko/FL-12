@@ -86,11 +86,14 @@ class Page {
     return inputName;
   }
 
-  createButton(type, name, value) {
+  createButton(type, name, text, value = '') {
     const btn = document.createElement('button');
     btn.setAttribute('type', type);
     btn.setAttribute('name', name);
-    btn.appendChild(document.createTextNode(value));
+    if (value !== '') {
+      btn.setAttribute('value', value);
+    }
+    btn.appendChild(document.createTextNode(text));
     return btn;
   }
 
@@ -150,45 +153,60 @@ class AddPage extends Page {
     return this.data[arr][key] ? this.data[arr][key] : '';
   }
 
+  collectTerms(form) {
+    const newTerms = [];
+    const newDefinitions = [];
+
+    const terms = form.elements['terms[]'];
+    const definitions = form.elements['definitions[]'];
+
+    if (terms && definitions) {
+      if (!terms.length) {
+        newTerms.push(terms.value);
+        newDefinitions.push(definitions.value);
+      } else {
+        for (let i = 0; i < terms.length; i++) {
+          newTerms.push(terms[i].value);
+          newDefinitions.push(definitions[i].value);
+        }
+      }
+    }
+
+    return [newTerms, newDefinitions];
+  }
+
   onFormSubmit(event) {
     event.preventDefault();
   }
 
   onFormClick(event) {
     const isAdd = event.target.name === 'add';
-    // const isSave = event.target.name === 'save';
+    const isSave = event.target.name === 'save';
+    const isDelTerm = event.target.name === 'delterm';
+
+    if (!isAdd && !isSave && !isDelTerm) {
+      return;
+    }
+
+    const form = document.getElementById('addform');
+    this.data.newsetname = form.elements['newsetname'].value;
+
+    const [terms, definitions] = this.collectTerms(form);
+    this.data.terms = terms;
+    this.data.definitions = definitions;
 
     if (isAdd) {
-      const form = document.getElementById('addform');
-
-      const newsetname = form.elements['newsetname'];
-      const terms = form.elements['terms[]'];
-      const definitions = form.elements['definitions[]'];
-
-      this.data.newsetname = newsetname.value;
-
-      if (terms && definitions) {
-        const newTerms = [];
-        const newDefinitions = [];
-
-        if (!terms.length) {
-          newTerms.push(terms.value);
-          newDefinitions.push(definitions.value);
-        } else {
-          for (let i = 0; i < terms.length; i++) {
-            newTerms.push(terms[i].value);
-            newDefinitions.push(definitions[i].value);
-          }
-        }
-
-        this.data.terms = newTerms;
-        this.data.definitions = newDefinitions;
-      }
-
       this.data.counter = this.data.counter + 1;
-
-      this.rerender();
     }
+
+    if (isDelTerm) {
+      this.data.terms.splice(event.target.value, 1);
+      this.data.definitions.splice(event.target.value, 1);
+
+      this.data.counter = this.data.counter - 1;
+    }
+
+    this.rerender();
   }
 
   content() {
@@ -205,6 +223,7 @@ class AddPage extends Page {
       const dl = this.createBox('div', 'card');
       dl.appendChild(this.createInput('text', 'terms[]', this.getV('terms', i), 'Enter term'));
       dl.appendChild(this.createInput('text', 'definitions[]', this.getV('definitions', i), 'Enter definition'));
+      dl.appendChild(this.createButton('button', 'delterm', 'Remove', i));
       form.appendChild(dl);
     }
 
