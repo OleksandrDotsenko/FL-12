@@ -140,6 +140,8 @@ class ModPage extends Page {
     this.storageAvailable = options.storageAvailable;
     this.redirect = options.redirect;
 
+    this.storageName = 'app-storage';
+
     this.pageClassName = 'page';
     this.headerText = 'Add new item';
 
@@ -147,13 +149,12 @@ class ModPage extends Page {
     this.errorForm = false;
     this.errorFormMessage = '* field is required';
 
-    this.counter = 0;
+    this.termsCounter = 0;
 
     this.data = {
       id: Number(options.params.id),
       kitname: '',
-      terms: [],
-      definitions: [],
+      collection: [],
       studied: false,
       date: new Date().getTime()
     };
@@ -162,14 +163,8 @@ class ModPage extends Page {
       const response = this.getDataFromStorage(this.data.id);
 
       if (response) {
-        this.data.kitname = response.kitname;
-        const [terms, definitions] = this.getTermsFromCollection(response.collection);
-        this.data.terms = terms;
-        this.data.definitions = definitions;
-        this.data.studied = response.studied;
-        this.data.date = response.date;
-
-        this.counter = response.collection.length;
+        this.data = Object.assign({}, response);
+        this.termsCounter = this.data.collection.length;
         this.headerText = 'Modify item';
       } else {
         this.errorPage = true;
@@ -179,52 +174,37 @@ class ModPage extends Page {
     }
   }
 
-  getV(arr, key) {
-    return this.data[arr][key] ? this.data[arr][key] : '';
+  valTerm(i) {
+    return this.data.collection[i] ? this.data.collection[i].term : '';
   }
 
-  getTermsFromForm(form) {
-    const newTerms = [];
-    const newDefinitions = [];
+  valDefinition(i) {
+    return this.data.collection[i] ? this.data.collection[i].definition : '';
+  }
 
-    const terms = form.elements['terms[]'];
-    const definitions = form.elements['definitions[]'];
+  collectionFromForm(form) {
+    const collection = [];
+    const formTerms = form.elements['terms[]'];
+    const formDefinitions = form.elements['definitions[]'];
 
-    if (terms && definitions) {
-      if (!terms.length) {
-        newTerms.push(terms.value);
-        newDefinitions.push(definitions.value);
+    if (formTerms && formDefinitions) {
+      if (!formTerms.length) {
+        if (formTerms.value || formDefinitions.value) {
+          collection.push({
+            term: formTerms.value,
+            definition: formDefinitions.value
+          });
+        }
       } else {
-        for (let i = 0; i < terms.length; i++) {
-          newTerms.push(terms[i].value);
-          newDefinitions.push(definitions[i].value);
+        for (let i = 0; i < formTerms.length; i++) {
+          if (formTerms[i].value || formDefinitions[i].value) {
+            collection.push({
+              term: formTerms[i].value,
+              definition: formDefinitions[i].value
+            });
+          }
         }
       }
-    }
-
-    return [newTerms, newDefinitions];
-  }
-
-  getTermsFromCollection(collection) {
-    const terms = [];
-    const definitions = [];
-
-    collection.forEach((el) => {
-      terms.push(el.term);
-      definitions.push(el.definition);
-    });
-
-    return [terms, definitions];
-  }
-
-  setTermsFromCollection(terms, definitions) {
-    const collection = [];
-
-    for (let i = 0; i < terms.length; i++) {
-      collection.push({
-        term: terms[i],
-        definition: definitions[i]
-      });
     }
 
     return collection;
@@ -238,27 +218,28 @@ class ModPage extends Page {
     const isAdd = event.target.name === 'add';
     const isSave = event.target.name === 'save';
     const isDelTerm = event.target.name === 'delterm';
+    const isCancel = event.target.name === 'cancel';
 
-    if (!isAdd && !isSave && !isDelTerm) {
+    if (!isAdd && !isSave && !isDelTerm && !isCancel) {
       return;
+    }
+
+    if (isCancel) {
+      this.redirect('/');
     }
 
     const form = document.getElementById('addform');
     this.data.kitname = form.elements['kitname'].value;
 
-    const [terms, definitions] = this.getTermsFromForm(form);
-    this.data.terms = terms;
-    this.data.definitions = definitions;
+    this.data.collection = this.collectionFromForm(form);
 
     if (isAdd) {
-      this.counter = this.counter + 1;
+      this.termsCounter = this.termsCounter + 1;
     }
 
     if (isDelTerm) {
-      this.data.terms.splice(event.target.value, 1);
-      this.data.definitions.splice(event.target.value, 1);
-
-      this.counter = this.counter - 1;
+      this.data.collection.splice(event.target.value, 1);
+      this.termsCounter = this.termsCounter - 1;
     }
 
     if (isSave) {
@@ -278,51 +259,37 @@ class ModPage extends Page {
   }
 
   saveDataToStorage() {
-    const collection = this.setTermsFromCollection(this.data.terms, this.data.definitions);
-
-    const data = {
-      id: this.data.date,
-      kitname: this.data.kitname,
-      collection: collection,
-      studied: this.data.studied,
-      date: this.data.date
-    };
-
-    let appDB = localStorage.getItem('app-db');
-    if (!appDB) {
-      appDB = [data];
+    const data = Object.assign({}, this.data, { id: this.data.date });
+    let storage = localStorage.getItem(this.storageName);
+    if (!storage) {
+      storage = [];
     } else {
-      appDB = JSON.parse(appDB);
-      appDB.push(data);
+      storage = JSON.parse(storage);
     }
-    localStorage.setItem('app-db', JSON.stringify(appDB));
+    storage.push(data);
+    localStorage.setItem(this.storageName, JSON.stringify(storage));
   }
 
   updateDataInStorage() {
-    const collection = this.setTermsFromCollection(this.data.terms, this.data.definitions);
-
-    const data = {
-      id: this.data.id,
-      kitname: this.data.kitname,
-      collection: collection,
-      studied: this.data.studied,
-      date: this.data.date
-    };
-
-    let appDB = localStorage.getItem('app-db');
-    appDB = JSON.parse(appDB);
-    appDB.forEach((el, index, arr) => {
+    const data = Object.assign({}, this.data);
+    let storage = localStorage.getItem(this.storageName);
+    storage = JSON.parse(storage);
+    storage.forEach((el, index, arr) => {
       if (el.id === data.id) {
         arr[index] = data;
       }
     });
-    localStorage.setItem('app-db', JSON.stringify(appDB));
+    localStorage.setItem(this.storageName, JSON.stringify(storage));
   }
 
   getDataFromStorage(id) {
-    let appDB = localStorage.getItem('app-db');
-    appDB = JSON.parse(appDB);
-    return appDB && appDB.length ? appDB.find((el) => el.id === id) : undefined;
+    let storage = localStorage.getItem(this.storageName);
+    if (storage) {
+      storage = JSON.parse(storage);
+      if (storage.length) {
+        return storage.find((el) => el.id === id);
+      }
+    }
   }
 
   content() {
@@ -346,10 +313,10 @@ class ModPage extends Page {
     buttonsBlock.appendChild(this.createButton('button', 'cancel', 'Cancel'));
     form.appendChild(buttonsBlock);
 
-    for (let i = 0; i < this.counter; i++) {
+    for (let i = 0; i < this.termsCounter; i++) {
       const dl = this.createBox('div', 'card');
-      dl.appendChild(this.createInput('text', 'terms[]', this.getV('terms', i), 'Enter term'));
-      dl.appendChild(this.createInput('text', 'definitions[]', this.getV('definitions', i), 'Enter definition'));
+      dl.appendChild(this.createInput('text', 'terms[]', this.valTerm(i), 'Enter term'));
+      dl.appendChild(this.createInput('text', 'definitions[]', this.valDefinition(i), 'Enter definition'));
       dl.appendChild(this.createButton('button', 'delterm', 'Remove', i));
       form.appendChild(dl);
     }
