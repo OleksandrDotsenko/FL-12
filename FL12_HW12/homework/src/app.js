@@ -136,7 +136,6 @@ class ModPage extends Page {
 
     this.onFormClick = this.onFormClick.bind(this);
 
-    this.ID = Number(options.params.id);
     this.rerender = options.rerender;
     this.storageAvailable = options.storageAvailable;
     this.redirect = options.redirect;
@@ -148,25 +147,29 @@ class ModPage extends Page {
     this.errorForm = false;
     this.errorFormMessage = '* field is required';
 
+    this.counter = 0;
+
     this.data = {
+      id: Number(options.params.id),
       kitname: '',
       terms: [],
       definitions: [],
       studied: false,
-      counter: 0
+      date: new Date().getTime()
     };
 
-    if (this.ID) {
-      const response = this.getDataFromStorage(this.ID);
+    if (this.data.id) {
+      const response = this.getDataFromStorage(this.data.id);
 
       if (response) {
-        this.data.kitname = response.name;
+        this.data.kitname = response.kitname;
         const [terms, definitions] = this.getTermsFromCollection(response.collection);
-        this.data.counter = response.collection.length;
         this.data.terms = terms;
         this.data.definitions = definitions;
         this.data.studied = response.studied;
+        this.data.date = response.date;
 
+        this.counter = response.collection.length;
         this.headerText = 'Modify item';
       } else {
         this.errorPage = true;
@@ -214,6 +217,19 @@ class ModPage extends Page {
     return [terms, definitions];
   }
 
+  setTermsFromCollection(terms, definitions) {
+    const collection = [];
+
+    for (let i = 0; i < terms.length; i++) {
+      collection.push({
+        term: terms[i],
+        definition: definitions[i]
+      });
+    }
+
+    return collection;
+  }
+
   onFormSubmit(event) {
     event.preventDefault();
   }
@@ -235,21 +251,25 @@ class ModPage extends Page {
     this.data.definitions = definitions;
 
     if (isAdd) {
-      this.data.counter = this.data.counter + 1;
+      this.counter = this.counter + 1;
     }
 
     if (isDelTerm) {
       this.data.terms.splice(event.target.value, 1);
       this.data.definitions.splice(event.target.value, 1);
 
-      this.data.counter = this.data.counter - 1;
+      this.counter = this.counter - 1;
     }
 
     if (isSave) {
       if (!this.data.kitname) {
         this.errorForm = true;
       } else if (this.storageAvailable) {
-        this.saveDataToStorage(this.formatDataBeforeSave());
+        if (this.data.id) {
+          this.updateDataInStorage();
+        } else {
+          this.saveDataToStorage();
+        }
         this.redirect('/');
       }
     }
@@ -257,27 +277,17 @@ class ModPage extends Page {
     this.rerender();
   }
 
-  formatDataBeforeSave() {
-    const data = {};
-    const timestamp = new Date().getTime();
+  saveDataToStorage() {
+    const collection = this.setTermsFromCollection(this.data.terms, this.data.definitions);
 
-    data.id = timestamp;
-    data.name = this.data.kitname;
-    data.studied = this.data.studied;
-    data.date = timestamp;
-    data.collection = [];
+    const data = {
+      id: this.data.date,
+      kitname: this.data.kitname,
+      collection: collection,
+      studied: this.data.studied,
+      date: this.data.date
+    };
 
-    for (let i = 0; i < this.data.terms.length; i++) {
-      data.collection.push({
-        term: this.data.terms[i],
-        definition: this.data.definitions[i]
-      });
-    }
-
-    return data;
-  }
-
-  saveDataToStorage(data) {
     let appDB = localStorage.getItem('app-db');
     if (!appDB) {
       appDB = [data];
@@ -285,6 +295,27 @@ class ModPage extends Page {
       appDB = JSON.parse(appDB);
       appDB.push(data);
     }
+    localStorage.setItem('app-db', JSON.stringify(appDB));
+  }
+
+  updateDataInStorage() {
+    const collection = this.setTermsFromCollection(this.data.terms, this.data.definitions);
+
+    const data = {
+      id: this.data.id,
+      kitname: this.data.kitname,
+      collection: collection,
+      studied: this.data.studied,
+      date: this.data.date
+    };
+
+    let appDB = localStorage.getItem('app-db');
+    appDB = JSON.parse(appDB);
+    appDB.forEach((el, index, arr) => {
+      if (el.id === data.id) {
+        arr[index] = data;
+      }
+    });
     localStorage.setItem('app-db', JSON.stringify(appDB));
   }
 
@@ -315,7 +346,7 @@ class ModPage extends Page {
     buttonsBlock.appendChild(this.createButton('button', 'cancel', 'Cancel'));
     form.appendChild(buttonsBlock);
 
-    for (let i = 0; i < this.data.counter; i++) {
+    for (let i = 0; i < this.counter; i++) {
       const dl = this.createBox('div', 'card');
       dl.appendChild(this.createInput('text', 'terms[]', this.getV('terms', i), 'Enter term'));
       dl.appendChild(this.createInput('text', 'definitions[]', this.getV('definitions', i), 'Enter definition'));
