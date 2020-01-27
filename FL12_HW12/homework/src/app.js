@@ -66,11 +66,6 @@ class Router {
 }
 
 class Page {
-  constructor(className, headerText) {
-    this.className = className;
-    this.headerText = headerText;
-  }
-
   createBox(tagName, tagClass, text = '') {
     const newTag = document.createElement(tagName);
     newTag.setAttribute('class', tagClass);
@@ -109,12 +104,12 @@ class Page {
     return newForm;
   }
 
-  wrapper(content) {
+  wrapper(content, className, headerText) {
     const wrapperElement = document.createElement('div');
-    wrapperElement.setAttribute('class', this.className);
+    wrapperElement.setAttribute('class', className);
 
     const headerElement = document.createElement('h1');
-    headerElement.appendChild(document.createTextNode(this.headerText));
+    headerElement.appendChild(document.createTextNode(headerText));
     wrapperElement.appendChild(headerElement);
 
     const contentElement = document.createElement('div');
@@ -127,43 +122,65 @@ class Page {
 }
 
 class MainPage extends Page {
-  constructor() {
-    super('MainPage', 'List of items');
-  }
-
   content() {
     const content = document.createElement('p');
     const blockText = document.createTextNode('Main Page');
     content.appendChild(blockText);
-    return this.wrapper(content);
+    return this.wrapper(content, 'MainPage', 'List of items');
   }
 }
 
-class AddPage extends Page {
+class ModPage extends Page {
   constructor(options) {
-    super('AddPage', 'Add new item');
+    super();
 
+    this.onFormClick = this.onFormClick.bind(this);
+
+    this.ID = Number(options.params.id);
     this.rerender = options.rerender;
     this.storageAvailable = options.storageAvailable;
     this.redirect = options.redirect;
-    this.onFormClick = this.onFormClick.bind(this);
+
+    this.pageClassName = 'page';
+    this.headerText = 'Add new item';
+
+    this.errorPage = false;
+    this.errorForm = false;
+    this.errorFormMessage = '* field is required';
 
     this.data = {
-      newsetname: '',
-      counter: 0,
+      kitname: '',
       terms: [],
       definitions: [],
       studied: false,
-      error: false,
-      errorMessage: '* field is required'
+      counter: 0
     };
+
+    if (this.ID) {
+      const response = this.getDataFromStorage(this.ID);
+
+      if (response) {
+        this.data.kitname = response.name;
+        const [terms, definitions] = this.getTermsFromCollection(response.collection);
+        this.data.counter = response.collection.length;
+        this.data.terms = terms;
+        this.data.definitions = definitions;
+        this.data.studied = response.studied;
+
+        this.headerText = 'Modify item';
+      } else {
+        this.errorPage = true;
+        this.pageClassName = 'error';
+        this.headerText = '404';
+      }
+    }
   }
 
   getV(arr, key) {
     return this.data[arr][key] ? this.data[arr][key] : '';
   }
 
-  collectTerms(form) {
+  getTermsFromForm(form) {
     const newTerms = [];
     const newDefinitions = [];
 
@@ -185,6 +202,18 @@ class AddPage extends Page {
     return [newTerms, newDefinitions];
   }
 
+  getTermsFromCollection(collection) {
+    const terms = [];
+    const definitions = [];
+
+    collection.forEach((el) => {
+      terms.push(el.term);
+      definitions.push(el.definition);
+    });
+
+    return [terms, definitions];
+  }
+
   onFormSubmit(event) {
     event.preventDefault();
   }
@@ -199,9 +228,9 @@ class AddPage extends Page {
     }
 
     const form = document.getElementById('addform');
-    this.data.newsetname = form.elements['newsetname'].value;
+    this.data.kitname = form.elements['kitname'].value;
 
-    const [terms, definitions] = this.collectTerms(form);
+    const [terms, definitions] = this.getTermsFromForm(form);
     this.data.terms = terms;
     this.data.definitions = definitions;
 
@@ -217,10 +246,10 @@ class AddPage extends Page {
     }
 
     if (isSave) {
-      if (!this.data.newsetname) {
-        this.data.error = true;
+      if (!this.data.kitname) {
+        this.errorForm = true;
       } else if (this.storageAvailable) {
-        this.saveDataToStorage(this.formatSet());
+        this.saveDataToStorage(this.formatDataBeforeSave());
         this.redirect('/');
       }
     }
@@ -228,12 +257,14 @@ class AddPage extends Page {
     this.rerender();
   }
 
-  formatSet() {
+  formatDataBeforeSave() {
     const data = {};
+    const timestamp = new Date().getTime();
 
-    data.name = this.data.newsetname;
+    data.id = timestamp;
+    data.name = this.data.kitname;
     data.studied = this.data.studied;
-    data.date = new Date().getTime();
+    data.date = timestamp;
     data.collection = [];
 
     for (let i = 0; i < this.data.terms.length; i++) {
@@ -257,15 +288,26 @@ class AddPage extends Page {
     localStorage.setItem('app-db', JSON.stringify(appDB));
   }
 
+  getDataFromStorage(id) {
+    let appDB = localStorage.getItem('app-db');
+    appDB = JSON.parse(appDB);
+    return appDB && appDB.length ? appDB.find((el) => el.id === id) : undefined;
+  }
+
   content() {
+    if (this.errorPage) {
+      const messageBlock = this.createBox('p', 'message', 'Set not found');
+      return this.wrapper(messageBlock, this.pageClassName, this.headerText);
+    }
+
     const form = this.createForm('addform', this.onFormSubmit, this.onFormClick);
 
-    const newsetnameBlock = this.createBox('p', 'datain');
-    newsetnameBlock.appendChild(this.createInput('text', 'newsetname', this.data.newsetname, 'name'));
-    if (this.data.error) {
-      newsetnameBlock.appendChild(this.createBox('span', 'message', ' ' + this.data.errorMessage));
+    const kitnameBlock = this.createBox('p', 'datain');
+    kitnameBlock.appendChild(this.createInput('text', 'kitname', this.data.kitname, 'name'));
+    if (this.errorForm) {
+      kitnameBlock.appendChild(this.createBox('span', 'message', ' ' + this.errorFormMessage));
     }
-    form.appendChild(newsetnameBlock);
+    form.appendChild(kitnameBlock);
 
     const buttonsBlock = this.createBox('p', 'buttons');
     buttonsBlock.appendChild(this.createButton('button', 'add', 'Add terms'));
@@ -281,33 +323,14 @@ class AddPage extends Page {
       form.appendChild(dl);
     }
 
-    return this.wrapper(form);
-  }
-}
-
-class ModifyPage extends Page {
-  constructor() {
-    super('ModifyPage', 'Modify item');
-  }
-
-  content() {
-    const content = document.createElement('p');
-    const blockText = document.createTextNode('Modify Page');
-    content.appendChild(blockText);
-    return this.wrapper(content);
+    return this.wrapper(form, this.pageClassName, this.headerText);
   }
 }
 
 class NotFoundPage extends Page {
-  constructor() {
-    super('NotFoundPage', '404');
-  }
-
   content() {
-    const content = document.createElement('p');
-    const blockText = document.createTextNode('Not Found Page');
-    content.appendChild(blockText);
-    return this.wrapper(content);
+    const messageBlock = this.createBox('p', 'message', 'Page not found');
+    return this.wrapper(messageBlock, 'error', '404');
   }
 }
 
@@ -321,13 +344,13 @@ class App {
       },
       {
         path: '/add',
-        Page: AddPage,
-        title: 'Add'
+        Page: ModPage,
+        title: 'Add new item'
       },
       {
         path: '/modify/:id',
-        Page: ModifyPage,
-        title: 'Modify'
+        Page: ModPage,
+        title: 'Modify item'
       },
       {
         path: '/404',
@@ -357,18 +380,19 @@ class App {
 
   handlerHashchange(event) {
     const route = this.router.getRoute(event);
+
     if (route) {
       document.title = 'My App :: ' + route.title;
-      if (!route.Page.content) {
-        route.Page = new route.Page({
-          rerender: this.rerender,
-          storageAvailable: this.storageAvailable,
-          redirect: this.router.redirect
-        });
-      }
-      this.currentPage = route.Page;
-      this.rerender();
+
+      this.currentPage = new route.Page({
+        rerender: this.rerender,
+        storageAvailable: this.storageAvailable,
+        redirect: this.router.redirect,
+        params: route.params
+      });
     }
+
+    this.rerender();
   }
 
   storageAvailable(type) {
@@ -392,6 +416,7 @@ class App {
 
   rerender() {
     const newNode = this.currentPage.content();
+
     if (!this.root.firstChild) {
       this.root.appendChild(newNode);
     } else {
