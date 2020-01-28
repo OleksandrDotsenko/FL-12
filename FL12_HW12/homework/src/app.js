@@ -169,6 +169,20 @@ class MainPage extends Page {
     if (response) {
       this.data.list = response;
     }
+
+    window.addEventListener('unload', this.onWindowUnload.bind(this));
+  }
+
+  onWindowUnload() {
+    this.saveDataToStorage();
+  }
+
+  closePage() {
+    this.saveDataToStorage();
+  }
+
+  saveDataToStorage() {
+    localStorage.setItem(this.storageName, JSON.stringify(this.data.list));
   }
 
   getDataFromStorage() {
@@ -492,6 +506,12 @@ class App {
 
   handlerHashchange(event) {
     const route = this.router.getRoute(event);
+
+    if (this.currentPage) {
+      if (this.currentPage.closePage) {
+        this.currentPage.closePage();
+      }
+    }
 
     if (route) {
       document.title = 'My App :: ' + route.title;
