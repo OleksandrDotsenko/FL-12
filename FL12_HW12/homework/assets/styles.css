@@ -12,16 +12,78 @@ h1 {
   color: steelblue;
 }
 
+.items {
+  list-style-type: none;
+  padding: 0;
+  width: 45%;
+}
+.items li {
+  display: flex;
+  align-items: center;
+}
 .items li:hover {
   background-color: #efefef;
+  border-radius: 2px;
 }
-
-.common {
+.items .common {
   color: black;
   cursor: pointer;
+  flex: auto;
+  padding: 0.5rem 0.3rem;
 }
-
-.studied {
+.items .studied {
   color: green;
   cursor: pointer;
+  flex: auto;
+  padding: 0.5rem 0.3rem;
+}
+.items .edit {
+  text-decoration: none;
+  padding: 0.1rem 0.3rem;
+  margin: 0 0.5rem;
+  color: steelblue;
+  border: 1px solid steelblue;
+  border-radius: 2px;
+}
+.items .edit:hover {
+  background-color: steelblue;
+  color: white;
+}
+.items button {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font: inherit;
+  padding: 0.1rem 0.3rem;
+  color: tomato;
+  border: 1px solid tomato;
+  border-radius: 2px;
+  margin-right: 0.5rem;
+}
+.items button:hover {
+  background-color: tomato;
+  color: white;
+}
+
+.add {
+  display: block;
+  text-decoration: none;
+  background-color: royalblue;
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  width: 5rem;
+  height: 5rem;
+  text-align: center;
+  font-size: 5rem;
+  color: white;
+  line-height: 5rem;
+  border-radius: 50%;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
+  opacity: 0.8;
+}
+.add:hover {
+  opacity: 1;
 }

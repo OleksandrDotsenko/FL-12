@@ -202,6 +202,8 @@ class MainPage extends Page {
       return this.wrapper(document.createTextNode(''), this.pageClassName, this.headerText);
     }
 
+    const content = document.createElement('div');
+
     const list = [...this.data.list];
     list.sort((elX, elY) => elX.date - elY.date);
 
@@ -220,8 +222,12 @@ class MainPage extends Page {
     });
 
     listBlock.addEventListener('click', this.onListClick);
+    content.appendChild(listBlock);
 
-    return this.wrapper(listBlock, this.pageClassName, this.headerText);
+    const addLink = this.createInnerLink('/add', '+', 'add');
+    content.appendChild(addLink);
+
+    return this.wrapper(content, this.pageClassName, this.headerText);
   }
 }
 
