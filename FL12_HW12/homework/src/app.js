@@ -496,7 +496,7 @@ class App {
       this.storageAvailable = true;
     } else {
       this.storageAvailable = false;
-      confirm('To use this application you must enable local storage support.');
+      alert('To use this application you must enable local storage support.');
     }
 
     this.rerender = this.rerender.bind(this);
@@ -508,6 +508,10 @@ class App {
   }
 
   handlerHashchange(event) {
+    if (!this.storageAvailable) {
+      return;
+    }
+
     const route = this.router.getRoute(event);
 
     if (this.currentPage) {
