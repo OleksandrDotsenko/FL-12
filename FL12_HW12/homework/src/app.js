@@ -66,11 +66,14 @@ class Router {
 }
 
 class Page {
-  createBox(tagName, tagClass, text = '') {
+  createBox(tagName, tagClass, text = '', id = '') {
     const newTag = document.createElement(tagName);
     newTag.setAttribute('class', tagClass);
     if (text !== '') {
       newTag.appendChild(document.createTextNode(text));
+    }
+    if (id !== '') {
+      newTag.setAttribute('id', id);
     }
     return newTag;
   }
@@ -84,12 +87,15 @@ class Page {
     return inputName;
   }
 
-  createButton(type, name, text, value = '') {
+  createButton(type, name, text, value = '', tagClass = '') {
     const btn = document.createElement('button');
     btn.setAttribute('type', type);
     btn.setAttribute('name', name);
     if (value !== '') {
       btn.setAttribute('value', value);
+    }
+    if (tagClass !== '') {
+      btn.setAttribute('class', tagClass);
     }
     btn.appendChild(document.createTextNode(text));
     return btn;
@@ -112,6 +118,14 @@ class Page {
       newLink.setAttribute('class', tagClass);
     }
     return newLink;
+  }
+
+  createItem(id, index, titleClass, titleVal) {
+    const newItem = document.createElement('li');
+    newItem.appendChild(this.createBox('span', titleClass, titleVal, 'id-' + index));
+    newItem.appendChild(this.createInnerLink('/modify/' + id, 'edit', 'edit'));
+    newItem.appendChild(this.createButton('button', 'remove', 'remove', index, 'remove'));
+    return newItem;
   }
 
   wrapper(content, className, headerText) {
@@ -137,23 +151,19 @@ class MainPage extends Page {
 
     this.onListClick = this.onListClick.bind(this);
 
+    this.rerender = options.rerender;
     this.storageName = options.storageName;
 
     this.pageClassName = 'page';
     this.headerText = 'List of items';
 
     this.data = {
-      common: [],
-      studied: []
+      list: []
     };
 
     const response = this.getDataFromStorage();
-
     if (response) {
-      this.data.common = response.filter((el) => !el.studied);
-      this.data.common.sort((elX, elY) => elX.date - elY.date);
-      this.data.studied = response.filter((el) => el.studied);
-      this.data.studied.sort((elX, elY) => elX.date - elY.date);
+      this.data.list = response;
     }
   }
 
@@ -168,30 +178,45 @@ class MainPage extends Page {
   }
 
   onListClick(event) {
-    console.log('-- click');
+    const onRemove = event.target.className === 'remove';
+    const onCommon = event.target.className === 'common';
+    const onStudied = event.target.className === 'studied';
+
+    if (onRemove) {
+      this.data.list.splice(event.target.value, 1);
+    }
+
+    if (onCommon || onStudied) {
+      const numStart = 3;
+      const id = event.target.id.substring(numStart);
+      if (this.data.list[id]) {
+        this.data.list[id].studied = !this.data.list[id].studied;
+      }
+    }
+
+    this.rerender();
   }
 
   content() {
-    if (!this.data.common.length && !this.data.studied.length) {
+    if (!this.data.list.length) {
       return this.wrapper(document.createTextNode(''), this.pageClassName, this.headerText);
     }
 
-    const listBlock = document.createElement('ul');
+    const list = [...this.data.list];
+    list.sort((elX, elY) => elX.date - elY.date);
 
-    this.data.common.forEach((el) => {
-      const listItem = document.createElement('li');
-      listItem.appendChild(this.createBox('span', 'common', el.kitname));
-      listItem.appendChild(this.createInnerLink('/modify/' + el.id, 'edit', 'edit'));
-      listItem.appendChild(this.createButton('button', 'remove-common', 'remove', el.id));
-      listBlock.appendChild(listItem);
+    const listBlock = this.createBox('ul', 'items');
+
+    list.forEach((el, index) => {
+      if (!el.studied) {
+        listBlock.appendChild(this.createItem(el.id, index, 'common', el.kitname));
+      }
     });
 
-    this.data.studied.forEach((el) => {
-      const listItem = document.createElement('li');
-      listItem.appendChild(this.createBox('span', 'studied', el.kitname));
-      listItem.appendChild(this.createInnerLink('/modify/' + el.id, 'edit', 'edit'));
-      listItem.appendChild(this.createButton('button', 'remove-studied', 'remove', el.id));
-      listBlock.appendChild(listItem);
+    list.forEach((el, index) => {
+      if (el.studied) {
+        listBlock.appendChild(this.createItem(el.id, index, 'studied', el.kitname));
+      }
     });
 
     listBlock.addEventListener('click', this.onListClick);

@@ -11,3 +11,17 @@ h1 {
 .message {
   color: steelblue;
 }
+
+.items li:hover {
+  background-color: #efefef;
+}
+
+.common {
+  color: black;
+  cursor: pointer;
+}
+
+.studied {
+  color: green;
+  cursor: pointer;
+}
