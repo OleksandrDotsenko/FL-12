@@ -447,7 +447,7 @@ class ModPage extends Page {
       const definitionText = 'Enter definition';
       dl.appendChild(this.createInput('text', 'terms[]', this.valTerm(i), termText, 'term'));
       dl.appendChild(this.createInput('text', 'definitions[]', this.valDefinition(i), definitionText, 'definition'));
-      dl.appendChild(this.createButton('button', 'delterm', 'x remove', i, 'delterm'));
+      dl.appendChild(this.createButton('button', 'delterm', 'remove', i, 'delterm'));
       form.appendChild(dl);
     }
 
