@@ -162,7 +162,7 @@ class MainPage extends Page {
     this.storageName = options.storageName;
 
     this.pageClassName = 'page';
-    this.headerText = 'List of items';
+    this.headerText = 'List of sets';
 
     this.data = {
       list: []
