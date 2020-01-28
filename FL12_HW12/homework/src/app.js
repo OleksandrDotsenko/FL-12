@@ -78,12 +78,15 @@ class Page {
     return newTag;
   }
 
-  createInput(type, name, value, placeholder) {
+  createInput(type, name, value, placeholder, tagClass = '') {
     const inputName = document.createElement('input');
     inputName.setAttribute('type', type);
     inputName.setAttribute('name', name);
     inputName.setAttribute('value', value);
     inputName.setAttribute('placeholder', placeholder);
+    if (tagClass !== '') {
+      inputName.setAttribute('class', tagClass);
+    }
     return inputName;
   }
 
@@ -123,7 +126,7 @@ class Page {
   createItem(id, index, titleClass, titleVal) {
     const newItem = document.createElement('li');
     newItem.appendChild(this.createBox('span', titleClass, titleVal, 'id-' + index));
-    newItem.appendChild(this.createInnerLink('/modify/' + id, 'edit', 'edit'));
+    newItem.appendChild(this.createButton('button', 'modify', 'modify', id, 'modify'));
     newItem.appendChild(this.createButton('button', 'remove', 'remove', index, 'remove'));
     return newItem;
   }
@@ -151,6 +154,7 @@ class MainPage extends Page {
 
     this.onListClick = this.onListClick.bind(this);
 
+    this.redirect = options.redirect;
     this.rerender = options.rerender;
     this.storageName = options.storageName;
 
@@ -178,12 +182,15 @@ class MainPage extends Page {
   }
 
   onListClick(event) {
+    const onModify = event.target.className === 'modify';
     const onRemove = event.target.className === 'remove';
     const onCommon = event.target.className === 'common';
     const onStudied = event.target.className === 'studied';
 
     if (onRemove) {
       this.data.list.splice(event.target.value, 1);
+
+      this.rerender();
     }
 
     if (onCommon || onStudied) {
@@ -192,9 +199,13 @@ class MainPage extends Page {
       if (this.data.list[id]) {
         this.data.list[id].studied = !this.data.list[id].studied;
       }
+
+      this.rerender();
     }
 
-    this.rerender();
+    if (onModify) {
+      this.redirect('/modify/' + event.target.value);
+    }
   }
 
   content() {
@@ -329,7 +340,7 @@ class ModPage extends Page {
       this.redirect('/');
     }
 
-    const form = document.getElementById('addform');
+    const form = document.getElementById('mainform');
     this.data.kitname = form.elements['kitname'].value;
 
     this.data.collection = this.collectionFromForm(form);
@@ -399,7 +410,7 @@ class ModPage extends Page {
       return this.wrapper(messageBlock, this.pageClassName, this.headerText);
     }
 
-    const form = this.createForm('addform', this.onFormSubmit, this.onFormClick);
+    const form = this.createForm('mainform', this.onFormSubmit, this.onFormClick);
 
     const kitnameBlock = this.createBox('p', 'datain');
     kitnameBlock.appendChild(this.createInput('text', 'kitname', this.data.kitname, 'name'));
@@ -416,9 +427,11 @@ class ModPage extends Page {
 
     for (let i = 0; i < this.termsCounter; i++) {
       const dl = this.createBox('div', 'card');
-      dl.appendChild(this.createInput('text', 'terms[]', this.valTerm(i), 'Enter term'));
-      dl.appendChild(this.createInput('text', 'definitions[]', this.valDefinition(i), 'Enter definition'));
-      dl.appendChild(this.createButton('button', 'delterm', 'Remove', i));
+      const termText = 'Enter term';
+      const definitionText = 'Enter definition';
+      dl.appendChild(this.createInput('text', 'terms[]', this.valTerm(i), termText, 'term'));
+      dl.appendChild(this.createInput('text', 'definitions[]', this.valDefinition(i), definitionText, 'definition'));
+      dl.appendChild(this.createButton('button', 'delterm', 'x remove', i, 'delterm'));
       form.appendChild(dl);
     }
 
@@ -428,8 +441,8 @@ class ModPage extends Page {
 
 class NotFoundPage extends Page {
   content() {
-    const messageBlock = this.createBox('p', 'message', 'Page not found');
-    return this.wrapper(messageBlock, 'error', '404');
+    const messageBlock = this.createInnerLink('/', 'Main page');
+    return this.wrapper(messageBlock, 'error', '404 Page not found');
   }
 }
 
