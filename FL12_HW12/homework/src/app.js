@@ -113,12 +113,15 @@ class Page {
     return newForm;
   }
 
-  createInnerLink(path, text, tagClass = '') {
+  createInnerLink(path, text, tagClass = '', tagTitle = '') {
     const newLink = document.createElement('a');
     newLink.setAttribute('href', '#' + path);
     newLink.appendChild(document.createTextNode(text));
     if (tagClass !== '') {
       newLink.setAttribute('class', tagClass);
+    }
+    if (tagTitle !== '') {
+      newLink.setAttribute('title', tagTitle);
     }
     return newLink;
   }
@@ -126,7 +129,7 @@ class Page {
   createItem(id, index, titleClass, titleVal) {
     const newItem = document.createElement('li');
     newItem.appendChild(this.createBox('span', titleClass, titleVal, 'id-' + index));
-    newItem.appendChild(this.createButton('button', 'modify', 'modify', id, 'modify'));
+    newItem.appendChild(this.createButton('button', 'modify', 'edit', id, 'modify'));
     newItem.appendChild(this.createButton('button', 'remove', 'remove', index, 'remove'));
     return newItem;
   }
@@ -224,7 +227,7 @@ class MainPage extends Page {
 
   content() {
     const content = document.createElement('div');
-    const addLink = this.createInnerLink('/add', '+', 'add');
+    const addLink = this.createInnerLink('/add', '+', 'add', 'Add new');
     content.appendChild(addLink);
 
     if (!this.data.list.length) {
@@ -268,7 +271,7 @@ class ModPage extends Page {
     this.storageName = options.storageName;
 
     this.pageClassName = 'page';
-    this.headerText = 'Add new item';
+    this.headerText = 'Add new set';
 
     this.errorPage = false;
     this.errorForm = false;
@@ -290,7 +293,7 @@ class ModPage extends Page {
       if (response) {
         this.data = Object.assign({}, response);
         this.termsCounter = this.data.collection.length;
-        this.headerText = 'Modify item';
+        this.headerText = 'Modify set';
       } else {
         this.errorPage = true;
         this.pageClassName = 'error';
@@ -470,12 +473,12 @@ class App {
       {
         path: '/add',
         Page: ModPage,
-        title: 'Add new item'
+        title: 'Add new set'
       },
       {
         path: '/modify/:id',
         Page: ModPage,
-        title: 'Modify item'
+        title: 'Modify set'
       },
       {
         path: '/404',
@@ -514,7 +517,7 @@ class App {
     }
 
     if (route) {
-      document.title = 'My App :: ' + route.title;
+      document.title = 'App :: ' + route.title;
 
       this.currentPage = new route.Page({
         rerender: this.rerender,

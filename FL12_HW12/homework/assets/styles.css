@@ -112,14 +112,15 @@ h1 {
   outline: none;
 }
 #mainform .datain {
-  max-width: 575px;
+  max-width: 675px;
   margin-right: 25px;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 #mainform .datain input {
   border: 1px solid #a9a9a9;
   padding: 0.5rem;
-  width: 100%;
+  width: 75%;
+  margin-bottom: 0.5rem;
 }
 #mainform .datain input:focus {
   outline: none;
