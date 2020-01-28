@@ -104,6 +104,16 @@ class Page {
     return newForm;
   }
 
+  createInnerLink(path, text, tagClass = '') {
+    const newLink = document.createElement('a');
+    newLink.setAttribute('href', '#' + path);
+    newLink.appendChild(document.createTextNode(text));
+    if (tagClass !== '') {
+      newLink.setAttribute('class', tagClass);
+    }
+    return newLink;
+  }
+
   wrapper(content, className, headerText) {
     const wrapperElement = document.createElement('div');
     wrapperElement.setAttribute('class', className);
@@ -122,11 +132,71 @@ class Page {
 }
 
 class MainPage extends Page {
+  constructor(options) {
+    super();
+
+    this.onListClick = this.onListClick.bind(this);
+
+    this.storageName = options.storageName;
+
+    this.pageClassName = 'page';
+    this.headerText = 'List of items';
+
+    this.data = {
+      common: [],
+      studied: []
+    };
+
+    const response = this.getDataFromStorage();
+
+    if (response) {
+      this.data.common = response.filter((el) => !el.studied);
+      this.data.common.sort((elX, elY) => elX.date - elY.date);
+      this.data.studied = response.filter((el) => el.studied);
+      this.data.studied.sort((elX, elY) => elX.date - elY.date);
+    }
+  }
+
+  getDataFromStorage() {
+    let storage = localStorage.getItem(this.storageName);
+    if (storage) {
+      storage = JSON.parse(storage);
+      if (storage.length) {
+        return storage;
+      }
+    }
+  }
+
+  onListClick(event) {
+    console.log('-- click');
+  }
+
   content() {
-    const content = document.createElement('p');
-    const blockText = document.createTextNode('Main Page');
-    content.appendChild(blockText);
-    return this.wrapper(content, 'MainPage', 'List of items');
+    if (!this.data.common.length && !this.data.studied.length) {
+      return this.wrapper(document.createTextNode(''), this.pageClassName, this.headerText);
+    }
+
+    const listBlock = document.createElement('ul');
+
+    this.data.common.forEach((el) => {
+      const listItem = document.createElement('li');
+      listItem.appendChild(this.createBox('span', 'common', el.kitname));
+      listItem.appendChild(this.createInnerLink('/modify/' + el.id, 'edit', 'edit'));
+      listItem.appendChild(this.createButton('button', 'remove-common', 'remove', el.id));
+      listBlock.appendChild(listItem);
+    });
+
+    this.data.studied.forEach((el) => {
+      const listItem = document.createElement('li');
+      listItem.appendChild(this.createBox('span', 'studied', el.kitname));
+      listItem.appendChild(this.createInnerLink('/modify/' + el.id, 'edit', 'edit'));
+      listItem.appendChild(this.createButton('button', 'remove-studied', 'remove', el.id));
+      listBlock.appendChild(listItem);
+    });
+
+    listBlock.addEventListener('click', this.onListClick);
+
+    return this.wrapper(listBlock, this.pageClassName, this.headerText);
   }
 }
 
@@ -140,7 +210,7 @@ class ModPage extends Page {
     this.storageAvailable = options.storageAvailable;
     this.redirect = options.redirect;
 
-    this.storageName = 'app-storage';
+    this.storageName = options.storageName;
 
     this.pageClassName = 'page';
     this.headerText = 'Add new item';
@@ -360,6 +430,7 @@ class App {
     this.root = root;
     this.router = new Router(routes);
     this.currentPage = null;
+    this.storageName = 'app-storage';
 
     if (this.storageAvailable('localStorage')) {
       this.storageAvailable = true;
@@ -386,7 +457,8 @@ class App {
         rerender: this.rerender,
         storageAvailable: this.storageAvailable,
         redirect: this.router.redirect,
-        params: route.params
+        params: route.params,
+        storageName: this.storageName
       });
     }
 
