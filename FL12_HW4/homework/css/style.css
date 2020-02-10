@@ -52,7 +52,7 @@ strong {
 
 .hero {
   height: 90vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/img/home-bg.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/FL-12/FL12_HW4/homework/img/home-bg.jpg');
   background-size: cover;
   background-position-y: 10vh;
   background-position-x: center;
